@@ -31,7 +31,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         //print("moved")
-        setUpButton()
+        //setUpButton()
     }
 
     override func update(_ currentTime: TimeInterval) {

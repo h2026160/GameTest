@@ -18,7 +18,7 @@ class Button: SKNode {
         self.buttonNum = buttonNum
         super.init()
         
-        self.zPosition=1.0
+        self.zPosition=8.0
         
         setButton()
         
