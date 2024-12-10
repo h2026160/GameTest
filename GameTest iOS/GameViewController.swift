@@ -24,7 +24,6 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
     }
-    //Hello Git
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {

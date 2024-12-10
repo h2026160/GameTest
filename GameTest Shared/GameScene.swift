@@ -40,21 +40,29 @@ class GameScene: SKScene {
 }
 
 extension GameScene{
-    func setUpButton(){
+    func setUpButton(scene: SKScene){
         for i in 0...9{
             //let ButtonNode=Button(buttonNum:i)
             //MainNode.addChild(ButtonNode)
             //addChild(MainNode)
             MainNode.addChild(Button(buttonNum:i))
         }
-        addChild(MainNode)
+        scene.addChild(MainNode)
     }
 }
 
 extension GameScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touched")
-        let newScene = SKScene(fileNamed: "TestScene")
-        self.view?.presentScene(newScene)
+        for touch in touches {
+            if touch==touches.first{
+                print("touched")
+                let newScene = SKScene(fileNamed: "TestScene")
+                self.view?.presentScene(newScene)
+                setUpButton(scene: newScene!)
+            }
+        }
+        //print("touched")
+        //let newScene = SKScene(fileNamed: "TestScene")
+        //self.view?.presentScene(newScene)
     }
 }
