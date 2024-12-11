@@ -22,7 +22,6 @@ class Button: SKNode {
         
         setButton()
         
-        isUserInteractionEnabled=true
     }
     
     required init?(coder aDecoder: NSCoder) {

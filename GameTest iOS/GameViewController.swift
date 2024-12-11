@@ -23,6 +23,8 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = false
         skView.showsFPS = true
         skView.showsNodeCount = true
+        skView.isMultipleTouchEnabled = true
+        skView.isUserInteractionEnabled = true
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

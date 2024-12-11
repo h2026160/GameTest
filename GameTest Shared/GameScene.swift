@@ -49,13 +49,10 @@ extension GameScene{
         }
         scene.addChild(MainNode)
     }
-}
 
-extension GameScene{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if touch==touches.first{
-                print("touched")
                 let newScene = SKScene(fileNamed: "TestScene")
                 self.view?.presentScene(newScene)
                 setUpButton(scene: newScene!)
