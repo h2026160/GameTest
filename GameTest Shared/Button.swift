@@ -20,7 +20,9 @@ class Button: SKNode {
         
         self.zPosition=8.0
         
-        setButton()
+        if buttonNum<10 {
+            setMainMenuButton()
+        }
         
     }
     
@@ -31,7 +33,7 @@ class Button: SKNode {
 }
 
 extension Button{
-    func setButton(){
+    func setMainMenuButton(){
         if(buttonNum==0){
             buttonNode=SKSpriteNode(imageNamed: "Continue_Game")
             buttonNode.name="ContinueGameButton"

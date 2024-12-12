@@ -7,19 +7,19 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class StartUpScene: SKScene {
     
-    private let MainNode=SKNode()
+    //private let MainNode=SKNode()
     //private let ButtonNode=Button(buttonNum: 0)
     
     //fileprivate var label : SKLabelNode?
     //fileprivate var spinnyNode : SKShapeNode?
 
     
-    class func newGameScene() -> GameScene {
+    class func newStartUpScene() -> StartUpScene {
         // Load 'GameScene.sks' as an SKScene.
-        guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
-            print("Failed to load GameScene.sks")
+        guard let scene = SKScene(fileNamed: "StartUpScene") as? StartUpScene else {
+            print("Failed to load StartUpScene.sks")
             abort()
         }
         
@@ -39,26 +39,26 @@ class GameScene: SKScene {
     }
 }
 
-extension GameScene{
-    func setUpButton(scene: SKScene){
-        for i in 0...9{
+extension StartUpScene{
+    //func setUpButton(scene: SKScene){
+        //for i in 0...9{
             //let ButtonNode=Button(buttonNum:i)
             //MainNode.addChild(ButtonNode)
             //addChild(MainNode)
-            MainNode.addChild(Button(buttonNum:i))
-        }
-        scene.addChild(MainNode)
-    }
+            //MainNode.addChild(Button(buttonNum:i))
+        //}
+        //scene.addChild(MainNode)
+    //}
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if touch==touches.first{
-                let newScene = SKScene(fileNamed: "TestScene")
+                let newScene = SKScene(fileNamed: "MenuScene")
                 self.view?.presentScene(newScene)
-                setUpButton(scene: newScene!)
+                //setUpButton(scene: newScene!)
             }
         }
-        //print("touched")
+        print("touched")
         //let newScene = SKScene(fileNamed: "TestScene")
         //self.view?.presentScene(newScene)
     }
