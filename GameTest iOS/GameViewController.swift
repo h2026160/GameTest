@@ -26,6 +26,7 @@ class GameViewController: UIViewController {
         skView.isMultipleTouchEnabled = true
         skView.isUserInteractionEnabled = true
     }
+    //Hi Mr.Raj
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
