@@ -23,6 +23,9 @@ class Button: SKNode {
         if buttonNum<10 {
             setMainMenuButton()
         }
+        else{
+            setNewGameAButton()
+        }
         
     }
     
@@ -33,6 +36,11 @@ class Button: SKNode {
 }
 
 extension Button{
+    
+    func getButtonNum() -> Int{
+        return buttonNum
+    }
+    
     func setMainMenuButton(){
         if(buttonNum==0){
             buttonNode=SKSpriteNode(imageNamed: "Continue_Game")
@@ -103,6 +111,24 @@ extension Button{
             buttonNode.xScale=0.1
             buttonNode.yScale=0.1
             buttonNode.position=CGPoint(x: 320, y: -200)
+        }
+        addChild(buttonNode)
+    }
+    
+    func setNewGameAButton(){
+        if(buttonNum==10){
+            buttonNode=SKSpriteNode(imageNamed: "Create")
+            buttonNode.name="CreateButton"
+            buttonNode.xScale=0.06
+            buttonNode.yScale=0.06
+            buttonNode.position=CGPoint(x: 600, y: -320)
+        }
+        if(buttonNum==11){
+            buttonNode=SKSpriteNode(imageNamed: "Back")
+            buttonNode.name="BackButton"
+            buttonNode.xScale=0.06
+            buttonNode.yScale=0.06
+            buttonNode.position=CGPoint(x: 500, y: -320)
         }
         addChild(buttonNode)
     }

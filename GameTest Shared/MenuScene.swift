@@ -31,7 +31,15 @@ extension MenuScene{
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchedMenuScene")
+        let location=touches.first?.location(in: self)
+        
+        let nodes=nodes(at: location!)
+        for node in nodes {
+            if node.name=="NewGameButton"{
+                let newScene=SKScene(fileNamed: "NewGameSceneA")
+                self.view?.presentScene(newScene)
+            }
+        }
     }
     
 }
