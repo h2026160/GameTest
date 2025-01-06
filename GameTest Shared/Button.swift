@@ -130,6 +130,41 @@ extension Button{
             buttonNode.yScale=0.06
             buttonNode.position=CGPoint(x: 500, y: -320)
         }
+        if(buttonNum==12){
+            buttonNode=SKSpriteNode(imageNamed: "Beijing_M11")
+            buttonNode.name="Beijing_M11_Button"
+            buttonNode.xScale=0.6
+            buttonNode.yScale=0.6
+            buttonNode.position=CGPoint(x: -480, y: 0)
+        }
+        if(buttonNum==13){
+            buttonNode=SKSpriteNode(imageNamed: "MTR_East_Rail")
+            buttonNode.name="MTR_East_Rail_Button"
+            buttonNode.xScale=0.6
+            buttonNode.yScale=0.6
+            buttonNode.position=CGPoint(x: -160, y: 0)
+        }
+        if(buttonNum==14){
+            buttonNode=SKSpriteNode(imageNamed: "Shenzhen_M11")
+            buttonNode.name="Shenzhen_M11_Button"
+            buttonNode.xScale=0.6
+            buttonNode.yScale=0.6
+            buttonNode.position=CGPoint(x: 160, y: 0)
+        }
+        if(buttonNum==15){
+            buttonNode=SKSpriteNode(imageNamed: "Next_Page")
+            buttonNode.name="NextPageButton"
+            buttonNode.xScale=0.06
+            buttonNode.yScale=0.06
+            buttonNode.position=CGPoint(x: -610, y: -200)
+        }
+        if(buttonNum==16){
+            buttonNode=SKSpriteNode(imageNamed: "Previous_Page")
+            buttonNode.name="PreviousPageButton"
+            buttonNode.xScale=0.06
+            buttonNode.yScale=0.06
+            buttonNode.position=CGPoint(x: -570, y: -200)
+        }
         addChild(buttonNode)
     }
 }
