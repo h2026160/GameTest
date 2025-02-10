@@ -23,8 +23,16 @@ class Button: SKNode {
         if buttonNum<10 {
             setMainMenuButton()
         }
-        else{
+        else if buttonNum<14{
             setNewGameAButton()
+        }else if buttonNum<16{
+            setLoadGameBButton()
+        }else if buttonNum<18{
+            setSettingsAButton()
+        }else if buttonNum<19{
+            setAchievementsAButton()
+        }else{
+            setDailyChallengesButton()
         }
         
     }

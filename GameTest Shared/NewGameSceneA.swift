@@ -9,7 +9,7 @@ import SpriteKit
 
 class NewGameSceneA: SKScene {
     
-    private let MainNode=SKNode()
+    private var MainNode=SKNode()
     
     private var pageNum:Int=1
     private var totalPages:Int=2
@@ -40,13 +40,13 @@ extension NewGameSceneA {
             MainNode.addChild(Button(buttonNum:13))
         }
         if(pageNum != totalPages){
-            for i in (14+(pageNumber-1)*3)...(14+(pageNumber)*3-1){
-                MainNode.addChild(Button(buttonNum:i))
+            for i in (1+(pageNumber-1)*3)...(1+(pageNumber)*3-1){
+                MainNode.addChild(Map(mapNum: i))
             }
         }
         else{
-            for i in (14+(pageNumber-1)*3)...(14+(pageNumber-1)*3+mapNum%3-1){
-                MainNode.addChild(Button(buttonNum:i))
+            for i in (1+(pageNumber-1)*3)...(1+(pageNumber-1)*3+mapNum%3-1){
+                MainNode.addChild(Map(mapNum: i))
             }
         }
         addChild(MainNode)
@@ -65,6 +65,12 @@ extension NewGameSceneA {
                 MainNode.removeAllChildren()
                 pageNum+=1
                 setUpButton(pageNumber:pageNum)
+            }
+            if node.name=="Beijing_M11_Button"{
+                //let newScene=SKScene(fileNamed: "NewGameSceneB")
+                let newScene=NewGameSceneB(MapNumber: 1)
+                self.view?.presentScene(newScene)
+                //MainNode.addChild(Map(mapNum: 1))
             }
         }
     }

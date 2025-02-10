@@ -19,6 +19,11 @@ class Map: SKNode{
         super.init()
         
         self.zPosition=8.0
+        if(mapNum<100){
+            setUpMapA(mapIndex: mapNum)
+        }else{
+            setUpDCMap(mapIndex: mapNum)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,5 +61,38 @@ extension Map{
             mapNode.yScale=0.6
             mapNode.position=CGPoint(x: -480, y: 0)
         }
+        addChild(mapNode)
+    }
+    
+    func setUpDCMap(mapIndex: Int){
+        if(mapIndex==101){
+            mapNode=SKSpriteNode(imageNamed: "Beijing_M11")
+            mapNode.name="Beijing_M11_Button"
+            mapNode.xScale=0.6
+            mapNode.yScale=0.6
+            mapNode.position=CGPoint(x: -400, y: 0)
+        }
+        if(mapIndex==102){
+            mapNode=SKSpriteNode(imageNamed: "MTR_East_Rail")
+            mapNode.name="MTR_East_Rail_Button"
+            mapNode.xScale=0.6
+            mapNode.yScale=0.6
+            mapNode.position=CGPoint(x: -400, y: 0)
+        }
+        if(mapIndex==103){
+            mapNode=SKSpriteNode(imageNamed: "Shenzhen_M11")
+            mapNode.name="Shenzhen_M11_Button"
+            mapNode.xScale=0.6
+            mapNode.yScale=0.6
+            mapNode.position=CGPoint(x: -400, y: 0)
+        }
+        if(mapIndex==104){
+            mapNode=SKSpriteNode(imageNamed: "Singapore_MRT_Circle")
+            mapNode.name="Singapore_Circle_Button"
+            mapNode.xScale=0.6
+            mapNode.yScale=0.6
+            mapNode.position=CGPoint(x: -400, y: 0)
+        }
+        addChild(mapNode)
     }
 }

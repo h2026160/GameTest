@@ -39,6 +39,25 @@ extension MenuScene{
                 let newScene=SKScene(fileNamed: "NewGameSceneA")
                 self.view?.presentScene(newScene)
             }
+            if node.name=="LoadGameButton"{
+                let newScene=SKScene(fileNamed: "LoadGameSceneA")
+                self.view?.presentScene(newScene)
+            }
+            if node.name=="SettingsButton"{
+                let newScene=SKScene(fileNamed: "SettingsSceneA")
+                self.view?.presentScene(newScene)
+            }
+            if node.name=="ExitGameButton"{
+                exit(0)
+            }
+            if node.name=="AchievementsButton"{
+                let newScene=SKScene(fileNamed: "AchievementsSceneA")
+                self.view?.presentScene(newScene)
+            }
+            if node.name=="DailyChallengesButton"{
+                let newScene=SKScene(fileNamed: "DailyChallengesScene")
+                self.view?.presentScene(newScene)
+            }
         }
     }
     
