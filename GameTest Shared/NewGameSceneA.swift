@@ -18,7 +18,6 @@ class NewGameSceneA: SKScene {
     private var atBottom:Bool=false
     
     override func didMove(to view: SKView) {
-        print("moved")
         setUpButton(pageNumber:pageNum)
     }
 
@@ -27,7 +26,6 @@ class NewGameSceneA: SKScene {
 extension NewGameSceneA {
     
     func setUpButton(pageNumber:Int){
-        print("called")
         for i in 10...11{
             MainNode.addChild(Button(buttonNum:i))
         }

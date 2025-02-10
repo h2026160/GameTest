@@ -58,7 +58,6 @@ extension StartUpScene{
                 //setUpButton(scene: newScene!)
             }
         }
-        print("touched")
         //let newScene = SKScene(fileNamed: "TestScene")
         //self.view?.presentScene(newScene)
     }
