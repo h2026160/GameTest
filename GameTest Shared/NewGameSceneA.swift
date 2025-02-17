@@ -68,9 +68,11 @@ extension NewGameSceneA {
             }
             if node.name=="Beijing_M11_Button"{
                 //let newScene=SKScene(fileNamed: "NewGameSceneB")
-                let newScene=NewGameSceneB(MapNumber: 1)
-                self.view?.presentScene(newScene)
+                //let newScene=NewGameSceneB(MapNumber: 1)
+                //self.view?.presentScene(newScene)
                 //MainNode.addChild(Map(mapNum: 1))
+                let newScene=SKScene(fileNamed: "Beijing_M11_GameScene")
+                self.view?.presentScene(newScene)
             }
         }
     }
