@@ -13,10 +13,47 @@ class Beijing_M11_GameScene: SKScene{
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
+    private var time: Int=0{
+        didSet{
+            if time>648000{
+                winGame()
+            }
+        }
+    }
+    private var money: Double=0.0{
+        didSet{
+            if money>360{
+                winGame()
+            }
+            if money<=0{
+                loseGame()
+            }
+        }
+    }
+    private var totalPassenger: Double=0.0{
+        didSet{
+            if totalPassenger>450{
+                winGame()
+            }
+        }
+    }
+
+
     
     override func didMove(to view: SKView) {
         setUpButton()
         setUpScheduleButton()
+    }
+    
+    
+    func winGame(){
+        let newScene=SKScene(fileNamed: "MenuScene")
+        self.view?.presentScene(newScene)
+    }
+    
+    func loseGame(){
+        let newScene=SKScene(fileNamed: "MenuScene")
+        self.view?.presentScene(newScene)
     }
 }
 extension Beijing_M11_GameScene{
@@ -135,7 +172,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        <#code#>
-    }
+//    override func update(_ currentTime: TimeInterval) {
+//        <#code#>
+//    }
 }
