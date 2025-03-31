@@ -13,9 +13,6 @@
 		737BD8252D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BD8242D0FB2AA00D21A3D /* NewGameSceneA.swift */; };
 		737BD8262D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BD8242D0FB2AA00D21A3D /* NewGameSceneA.swift */; };
 		737BD8272D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737BD8242D0FB2AA00D21A3D /* NewGameSceneA.swift */; };
-		738D8EB82D87B76A00CC48FF /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D8EB72D87B76A00CC48FF /* Timer.swift */; };
-		738D8EB92D87B76A00CC48FF /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D8EB72D87B76A00CC48FF /* Timer.swift */; };
-		738D8EBA2D87B76A00CC48FF /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D8EB72D87B76A00CC48FF /* Timer.swift */; };
 		73951FD62D2CD76B00009527 /* NewGameSceneB.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73951FD52D2CD76B00009527 /* NewGameSceneB.sks */; };
 		73951FD72D2CD76B00009527 /* NewGameSceneB.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73951FD52D2CD76B00009527 /* NewGameSceneB.sks */; };
 		73951FD82D2CD76B00009527 /* NewGameSceneB.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73951FD52D2CD76B00009527 /* NewGameSceneB.sks */; };
@@ -90,12 +87,14 @@
 		73C51F652CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
 		73C51F662CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
 		73C51F672CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
+		73FBAA162D93D0F500C0B58D /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBAA152D93D0F500C0B58D /* GameTimer.swift */; };
+		73FBAA172D93D0F500C0B58D /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBAA152D93D0F500C0B58D /* GameTimer.swift */; };
+		73FBAA182D93D0F500C0B58D /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FBAA152D93D0F500C0B58D /* GameTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		737BD8202D0FB28E00D21A3D /* NewGameSceneA.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewGameSceneA.sks; sourceTree = "<group>"; };
 		737BD8242D0FB2AA00D21A3D /* NewGameSceneA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameSceneA.swift; sourceTree = "<group>"; };
-		738D8EB72D87B76A00CC48FF /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		73951FD52D2CD76B00009527 /* NewGameSceneB.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewGameSceneB.sks; sourceTree = "<group>"; };
 		73951FD92D2CD8C300009527 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		739F6FE22D0B035000F035E1 /* StartUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUpScene.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		73C51F4A2CFE94CA008DD5C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73C51F4C2CFE94CA008DD5C8 /* GameTest_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameTest_macOS.entitlements; sourceTree = "<group>"; };
 		73C51F642CFE95A1008DD5C8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		73FBAA152D93D0F500C0B58D /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,8 +190,8 @@
 				73A1A2FA2D30F1D800B472C5 /* SettingsSceneA.swift */,
 				73ABC5B72D5AFC4C00315CCC /* Beijing_M11_GameScene.sks */,
 				73ABC5BB2D5AFCC200315CCC /* Beijing_M11_GameScene.swift */,
-				738D8EB72D87B76A00CC48FF /* Timer.swift */,
 				739F6FE22D0B035000F035E1 /* StartUpScene.swift */,
+				73FBAA152D93D0F500C0B58D /* GameTimer.swift */,
 				739F6FEE2D0B043300F035E1 /* MenuScene.swift */,
 				73C51F642CFE95A1008DD5C8 /* Button.swift */,
 				73951FD92D2CD8C300009527 /* Map.swift */,
@@ -408,8 +408,8 @@
 			files = (
 				73A1A2ED2D30EB5000B472C5 /* DailyChallengesScene.swift in Sources */,
 				73C51F282CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
+				73FBAA162D93D0F500C0B58D /* GameTimer.swift in Sources */,
 				739F6FE32D0B035000F035E1 /* StartUpScene.swift in Sources */,
-				738D8EB82D87B76A00CC48FF /* Timer.swift in Sources */,
 				73A1A2DE2D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
 				739F6FEF2D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BC2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
@@ -430,8 +430,8 @@
 			files = (
 				73A1A2EE2D30EB5000B472C5 /* DailyChallengesScene.swift in Sources */,
 				73C51F382CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
+				73FBAA172D93D0F500C0B58D /* GameTimer.swift in Sources */,
 				739F6FE42D0B035000F035E1 /* StartUpScene.swift in Sources */,
-				738D8EB92D87B76A00CC48FF /* Timer.swift in Sources */,
 				73A1A2DF2D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
 				739F6FF02D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BD2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
@@ -452,8 +452,8 @@
 			files = (
 				73A1A2EF2D30EB5000B472C5 /* DailyChallengesScene.swift in Sources */,
 				73C51F482CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
+				73FBAA182D93D0F500C0B58D /* GameTimer.swift in Sources */,
 				739F6FE52D0B035000F035E1 /* StartUpScene.swift in Sources */,
-				738D8EBA2D87B76A00CC48FF /* Timer.swift in Sources */,
 				73A1A2E02D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
 				739F6FF12D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BE2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
