@@ -13,9 +13,10 @@ class Beijing_M11_GameScene: SKScene{
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
-    private var time: Int=0{
+    let timer=GameTimer()
+    private var time: Double=0{
         didSet{
-            if time>648000{
+            if time>648000.0{
                 winGame()
             }
         }
@@ -41,6 +42,7 @@ class Beijing_M11_GameScene: SKScene{
 
     
     override func didMove(to view: SKView) {
+        timer.startTimer()
         setUpButton()
         setUpScheduleButton()
     }
