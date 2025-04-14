@@ -13,6 +13,8 @@ class Beijing_M11_GameScene: SKScene{
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
+    private var scheduleTicketPricePage: Int=0
+    private var runGame: Bool=false
     let timer=GameTimer()
     private var time: Double=0{
         didSet{
@@ -63,6 +65,8 @@ extension Beijing_M11_GameScene{
         for i in 1...4{
             MainNode.addChild(GameSceneButtons(buttonNum: i))
         }
+        MainNode.addChild(GameSceneButtons(buttonNum: 25))
+        MainNode.addChild(GameSceneButtons(buttonNum: 27))
         addChild(MainNode)
     }
     
@@ -79,6 +83,10 @@ extension Beijing_M11_GameScene{
         for i in 23...24{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
+        for i in 28...29{
+            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
+        }
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 32))
 
         //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 23))
     }
@@ -116,12 +124,81 @@ extension Beijing_M11_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 20+departureStationPage))
     }
     
+    func updateTicketPrice(ticketPricePage: Int){
+        let ticketPriceIndicatorLoaction=CGPoint(x: 120, y: 140)
+        
+        let nodes=nodes(at: ticketPriceIndicatorLoaction)
+        for node in nodes {
+            if(node.name=="Initial_Ticket_Price")||(node.name=="10_Yuan_Ticket_Price")||(node.name=="15_Yuan_Ticket_Price"){
+                node.removeFromParent()
+            }
+        }
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 29+ticketPricePage))
+    }
+    
+    func clearButtons(){
+        let previousTimeButtonPosition=CGPoint(x: -322, y: 85)
+        let nextTimeButtonPosition=CGPoint(x: -278, y: 85)
+        let previousStationButtonPosition=CGPoint(x: -182, y: 85)
+        let nextStationButtonPosition=CGPoint(x: -138, y: 85)
+        let previousTicketPriceButtonPosition=CGPoint(x: 98, y: 85)
+        let nextTicketPriceButtonPosition=CGPoint(x: 142, y: 85)
+        let yesButtonPosition=CGPoint(x: 220, y: 140)
+        
+        let nodesA=nodes(at: previousTimeButtonPosition)
+        for node in nodesA{
+            if node.name=="Previous_Time_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesB=nodes(at: nextTimeButtonPosition)
+        for node in nodesB{
+            if node.name=="Next_Time_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesC=nodes(at: previousStationButtonPosition)
+        for node in nodesC{
+            if node.name=="Previous_Departure_Station_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesD=nodes(at: nextStationButtonPosition)
+        for node in nodesD{
+            if node.name=="Next_Departure_Station_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesE=nodes(at: previousTicketPriceButtonPosition)
+        for node in nodesE{
+            if node.name=="Previous_Ticket_Price_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesF=nodes(at: nextTicketPriceButtonPosition)
+        for node in nodesF{
+            if node.name=="Next_Ticket_Price_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesG=nodes(at: yesButtonPosition)
+        for node in nodesG{
+            if node.name=="Yes_Button"{
+                node.removeFromParent()
+            }
+        }
+
+
+
+
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let location=touches.first?.location(in: self)
-        //let backgroundLoaction=CGPoint(x: 0, y: 0)
-        //let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
-        //let departureStationIndicatorLoaction=CGPoint(x: -160, y: 140)
-        //let excludedArea=CGRect(x: 0, y: 0, width: 479, height: 269)
+//        let backgroundLoaction=CGPoint(x: 0, y: 0)
+//        let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
+//        let departureStationIndicatorLoaction=CGPoint(x: -160, y: 140)
+//        let excludedArea=CGRect(x: 0, y: 0, width: 479, height: 269)
         
         if(hasScheduleButton==false){
 //            if(!excludedArea.contains(location!)){
@@ -158,6 +235,17 @@ extension Beijing_M11_GameScene{
                         scheduleDepartureStationPage-=1
                         updateDepartureSatation(departureStationPage: scheduleDepartureStationPage)
                     }
+                    if (node.name=="Next_Ticket_Price_Button")&&(scheduleTicketPricePage<2){
+                        scheduleTicketPricePage+=1
+                        updateTicketPrice(ticketPricePage: scheduleTicketPricePage)
+                    }
+                    if (node.name=="Previous_Ticket_Price_Button")&&(scheduleTicketPricePage>1){
+                        scheduleTicketPricePage-=1
+                        updateTicketPrice(ticketPricePage: scheduleTicketPricePage)
+                    }
+                    if node.name=="Yes_Button"{
+                        clearButtons()
+                    }
                 }
             }
         }
@@ -170,6 +258,23 @@ extension Beijing_M11_GameScene{
                     hasScheduleButton=false
                     node.removeFromParent()
                 }
+            }
+        }
+        let normalNodes=nodes(at: location!)
+        for node in normalNodes {
+            if node.name=="Pause_Button"{
+                MainNode.addChild(GameSceneButtons(buttonNum: 26))
+                runGame=true
+                node.removeFromParent()
+            }
+            if node.name=="Play_Button"{
+                MainNode.addChild(GameSceneButtons(buttonNum: 25))
+                runGame=false
+                node.removeFromParent()
+            }
+            if node.name=="Exit_Game_Scene_Button"{
+                let newScene=SKScene(fileNamed: "NewGameSceneA")
+                self.view?.presentScene(newScene)
             }
         }
     }

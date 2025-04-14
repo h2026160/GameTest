@@ -196,8 +196,69 @@ extension GameSceneButtons{
             gameSceneButtonNode.yScale=0.06
             gameSceneButtonNode.position=CGPoint(x: 120, y: 140)
         }
-
-
+        if(buttonIndex==25){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Pause")
+            gameSceneButtonNode.name="Pause_Button"
+            gameSceneButtonNode.xScale=0.2
+            gameSceneButtonNode.yScale=0.2
+            gameSceneButtonNode.position=CGPoint(x: 600, y: -300)
+        }
+        if(buttonIndex==26){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Play")
+            gameSceneButtonNode.name="Play_Button"
+            gameSceneButtonNode.xScale=0.2
+            gameSceneButtonNode.yScale=0.2
+            gameSceneButtonNode.position=CGPoint(x: 600, y: -300)
+        }
+        if(buttonIndex==27){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Exit_Game_Icon")
+            gameSceneButtonNode.name="Exit_Game_Scene_Button"
+            gameSceneButtonNode.xScale=0.2
+            gameSceneButtonNode.yScale=0.2
+            gameSceneButtonNode.position=CGPoint(x: -600, y: -300)
+        }
+        if(buttonIndex==28){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Next_Object")
+            gameSceneButtonNode.name="Next_Ticket_Price_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 142, y: 85)
+        }
+        if(buttonIndex==29){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Previous_Object")
+            gameSceneButtonNode.name="Previous_Ticket_Price_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 98, y: 85)
+        }
+        if(buttonIndex==30){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "10_Yuan")
+            gameSceneButtonNode.name="10_Yuan_Ticket_Price"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 120, y: 140)
+        }
+        if(buttonIndex==31){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "15_Yuan")
+            gameSceneButtonNode.name="15_Yuan_Ticket_Price"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 120, y: 140)
+        }
+        if(buttonIndex==32){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Yes")
+            gameSceneButtonNode.name="Yes_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 220, y: 140)
+        }
+        if(buttonIndex==33){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "No")
+            gameSceneButtonNode.name="No_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 280, y: 140)
+        }
         addChild(gameSceneButtonNode)
     }
 }
