@@ -279,7 +279,9 @@ extension Beijing_M11_GameScene{
         }
     }
     
-//    override func update(_ currentTime: TimeInterval) {
-//        <#code#>
-//    }
+    override func update(_ currentTime: TimeInterval) {
+        let currentTime=Date().timeIntervalSinceReferenceDate
+        gameTime=currentTime-startTime
+        print(gameTime)
+    }
 }
