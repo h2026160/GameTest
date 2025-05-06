@@ -10,15 +10,27 @@ import SpriteKit
 
 class GameSceneButtons: SKNode{
     private var buttonNum: Int
+    private var buttonRowCount: Int
     private var gameSceneButtonNode: SKSpriteNode!
     
     init(buttonNum: Int) {
         self.buttonNum = buttonNum
+        self.buttonRowCount=1
         super.init()
         
         self.zPosition=6.0
         
         setUpGameButtons(buttonIndex: buttonNum)
+    }
+    
+    init(buttonNum: Int,buttonRowCount: Int) {
+        self.buttonNum = buttonNum
+        self.buttonRowCount = buttonRowCount
+        super.init()
+        
+        self.zPosition=6.0
+        
+        setUpMovableButtons(buttonIndex: buttonNum,buttonRow: buttonRowCount)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -259,6 +271,17 @@ extension GameSceneButtons{
             gameSceneButtonNode.yScale=0.075
             gameSceneButtonNode.position=CGPoint(x: 280, y: 140)
         }
+        if(buttonIndex==34){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Add")
+            gameSceneButtonNode.name="Add_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: -380, y: 80)
+        }
+        addChild(gameSceneButtonNode)
+    }
+    
+    func setUpMovableButtons(buttonIndex: Int,buttonRow: Int){
         addChild(gameSceneButtonNode)
     }
 }

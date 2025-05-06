@@ -14,18 +14,25 @@ class Beijing_M11_GameScene: SKScene{
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
     private var scheduleTicketPricePage: Int=0
+    private var scheduleSetupRowNumber: Int=1
     private var runGame: Bool=false
-    let timer=GameTimer()
-    private var time: Double=0{
+    private var startTime: TimeInterval=0
+    private var pauseStartTime: TimeInterval=0
+    private var totalTime: TimeInterval=0
+    private var passengerFlow: Double=600.0
+    let timeLabel=SKLabelNode(text: "Time:0")
+    let passengerLabel=SKLabelNode(text: "0")
+    let moneyLabel=SKLabelNode(text: "0")
+    private var gameTime: TimeInterval=0{
         didSet{
-            if time>648000.0{
+            if gameTime>648000.0{
                 winGame()
             }
         }
     }
-    private var money: Double=0.0{
+    private var money: Double=120000.0{
         didSet{
-            if money>360{
+            if money>360000{
                 winGame()
             }
             if money<=0{
@@ -35,7 +42,7 @@ class Beijing_M11_GameScene: SKScene{
     }
     private var totalPassenger: Double=0.0{
         didSet{
-            if totalPassenger>450{
+            if totalPassenger>450000{
                 winGame()
             }
         }
@@ -44,7 +51,26 @@ class Beijing_M11_GameScene: SKScene{
 
     
     override func didMove(to view: SKView) {
-        timer.startTimer()
+        startTime=Date().timeIntervalSinceReferenceDate
+        
+        timeLabel.position=CGPoint(x: 600, y: 260)
+        timeLabel.fontSize=24
+        timeLabel.fontColor = .blue
+        timeLabel.fontName="Arial-BoldMT"
+        addChild(timeLabel)
+        
+        passengerLabel.position=CGPoint(x: 0, y: 310)
+        passengerLabel.fontSize=24
+        passengerLabel.fontColor = .blue
+        passengerLabel.fontName="Arial-BoldMT"
+        addChild(passengerLabel)
+        
+        moneyLabel.position=CGPoint(x: 300, y: 310)
+        moneyLabel.fontSize=24
+        moneyLabel.fontColor = .blue
+        moneyLabel.fontName="Arial-BoldMT"
+        addChild(moneyLabel)
+        
         setUpButton()
         setUpScheduleButton()
     }
@@ -87,8 +113,13 @@ extension Beijing_M11_GameScene{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 32))
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 34))
 
         //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 23))
+    }
+    
+    func setUpMovableSceduleButton(rowNumber: Int){
+        
     }
     
     func updateTime(timePage: Int){
@@ -264,6 +295,7 @@ extension Beijing_M11_GameScene{
         for node in normalNodes {
             if node.name=="Pause_Button"{
                 MainNode.addChild(GameSceneButtons(buttonNum: 26))
+                //startTime=Date().timeIntervalSinceReferenceDate
                 runGame=true
                 node.removeFromParent()
             }
@@ -282,6 +314,23 @@ extension Beijing_M11_GameScene{
     override func update(_ currentTime: TimeInterval) {
         let currentTime=Date().timeIntervalSinceReferenceDate
         gameTime=currentTime-startTime
-        print(gameTime)
+        let formattedTime = String(format: "Time: %.1f", gameTime)
+        timeLabel.text = formattedTime
+        
+        if(gameTime>86400){
+            passengerFlow=passengerFlow*pow((1+1/1200), gameTime/86400)
+            totalPassenger+=passengerFlow/86400
+        }
+        else{
+            totalPassenger+=passengerFlow/86400
+        }
+        let formattedPassenger = String(format: "%.0f", totalPassenger)
+        passengerLabel.text = formattedPassenger
+        
+        let moneyChange=passengerFlow*5*Double(scheduleTicketPricePage)-6200.0/3600
+        money+=moneyChange
+        let formattedMoney = String(format: "%.1f", money)
+        moneyLabel.text = formattedMoney
+        
     }
 }
