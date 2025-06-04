@@ -278,6 +278,55 @@ extension GameSceneButtons{
             gameSceneButtonNode.yScale=0.075
             gameSceneButtonNode.position=CGPoint(x: -380, y: 80)
         }
+        if(buttonIndex==35){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Stop_Time")
+            gameSceneButtonNode.name="Stop_Time_Title"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 260, y: 200)
+        }
+        if(buttonIndex==36){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Next_Object")
+            gameSceneButtonNode.name="Next_Stop_Time_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 282, y: 85)
+        }
+        if(buttonIndex==37){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Previous_Object")
+            gameSceneButtonNode.name="Previous_Stop_Time_Button"
+            gameSceneButtonNode.xScale=0.075
+            gameSceneButtonNode.yScale=0.075
+            gameSceneButtonNode.position=CGPoint(x: 238, y: 85)
+        }
+        if(buttonIndex==38){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Object(0)")
+            gameSceneButtonNode.name="Initial_Stop_Time"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 260, y: 140)
+        }
+        if(buttonIndex==39){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "30s")
+            gameSceneButtonNode.name="30_Seconds_Stop_Time"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 260, y: 140)
+        }
+        if(buttonIndex==40){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "45s")
+            gameSceneButtonNode.name="45_Seconds_Stop_Time"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 260, y: 140)
+        }
+        if(buttonIndex==41){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "60s")
+            gameSceneButtonNode.name="60_Seconds_Stop_Time"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: 260, y: 140)
+        }
         addChild(gameSceneButtonNode)
     }
     

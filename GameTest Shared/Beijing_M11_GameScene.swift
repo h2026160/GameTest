@@ -8,18 +8,24 @@
 import SpriteKit
 
 class Beijing_M11_GameScene: SKScene{
+    
     private var MainNode=SKNode()
     private var hasScheduleButton: Bool=true
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
     private var scheduleTicketPricePage: Int=0
+    private var scheduleStopTimePage: Int=0
     private var scheduleSetupRowNumber: Int=1
     private var runGame: Bool=false
     private var startTime: TimeInterval=0
     private var pauseStartTime: TimeInterval=0
     private var totalTime: TimeInterval=0
     private var passengerFlow: Double=600.0
+    private var timeDouble: Double=1.0
+    
+    //private var stopTime
+    
     let timeLabel=SKLabelNode(text: "Time:0")
     let passengerLabel=SKLabelNode(text: "0")
     let moneyLabel=SKLabelNode(text: "0")
@@ -112,10 +118,14 @@ extension Beijing_M11_GameScene{
         for i in 28...29{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 32))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 34))
+        //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 32))
+        //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 34))
 
         //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 23))
+        for i in 35...38{
+            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
+        }
+
     }
     
     func setUpMovableSceduleButton(rowNumber: Int){
@@ -158,13 +168,25 @@ extension Beijing_M11_GameScene{
     func updateTicketPrice(ticketPricePage: Int){
         let ticketPriceIndicatorLoaction=CGPoint(x: 120, y: 140)
         
-        let nodes=nodes(at: ticketPriceIndicatorLoaction)
-        for node in nodes {
+        let nodesC=nodes(at: ticketPriceIndicatorLoaction)
+        for node in nodesC {
             if(node.name=="Initial_Ticket_Price")||(node.name=="10_Yuan_Ticket_Price")||(node.name=="15_Yuan_Ticket_Price"){
                 node.removeFromParent()
             }
         }
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 29+ticketPricePage))
+    }
+    
+    func updateStopTime(stopTimePage: Int){
+        let stopTimeIndicatorLocation=CGPoint(x: 260, y: 140)
+        
+        let nodesD=nodes(at: stopTimeIndicatorLocation)
+        for node in nodesD {
+            if(node.name=="Initial_Stop_Time")||(node.name=="30_Seconds_Stop_Time")||(node.name=="45_Seconds_Stop_Time")||((node.name=="60_Seconds_Stop_Time")){
+                node.removeFromParent()
+            }
+        }
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 38+stopTimePage))
     }
     
     func clearButtons(){
@@ -174,6 +196,8 @@ extension Beijing_M11_GameScene{
         let nextStationButtonPosition=CGPoint(x: -138, y: 85)
         let previousTicketPriceButtonPosition=CGPoint(x: 98, y: 85)
         let nextTicketPriceButtonPosition=CGPoint(x: 142, y: 85)
+        let previousStopTimeButtonPosition=CGPoint(x: 238, y: 85)
+        let nextStopTimeButtonPosition=CGPoint(x: 282, y: 85)
         let yesButtonPosition=CGPoint(x: 220, y: 140)
         
         let nodesA=nodes(at: previousTimeButtonPosition)
@@ -215,6 +239,18 @@ extension Beijing_M11_GameScene{
         let nodesG=nodes(at: yesButtonPosition)
         for node in nodesG{
             if node.name=="Yes_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesH=nodes(at: previousStopTimeButtonPosition)
+        for node in nodesH{
+            if node.name=="Previous_Stop_Time_Button"{
+                node.removeFromParent()
+            }
+        }
+        let nodesI=nodes(at: nextStopTimeButtonPosition)
+        for node in nodesI{
+            if node.name=="Next_Stop_Time_Button"{
                 node.removeFromParent()
             }
         }
@@ -274,6 +310,14 @@ extension Beijing_M11_GameScene{
                         scheduleTicketPricePage-=1
                         updateTicketPrice(ticketPricePage: scheduleTicketPricePage)
                     }
+                    if (node.name=="Next_Stop_Time_Button")&&(scheduleStopTimePage<3){
+                        scheduleStopTimePage+=1
+                        updateStopTime(stopTimePage: scheduleStopTimePage)
+                    }
+                    if (node.name=="Previous_Stop_Time_Button")&&(scheduleStopTimePage>1){
+                        scheduleStopTimePage-=1
+                        updateStopTime(stopTimePage: scheduleStopTimePage)
+                    }
                     if node.name=="Yes_Button"{
                         clearButtons()
                     }
@@ -314,21 +358,34 @@ extension Beijing_M11_GameScene{
     override func update(_ currentTime: TimeInterval) {
         let currentTime=Date().timeIntervalSinceReferenceDate
         gameTime=currentTime-startTime
+        let interval=gameTime
+        print(interval)
         let formattedTime = String(format: "Time: %.1f", gameTime)
         timeLabel.text = formattedTime
         
-        if(gameTime>86400){
-            passengerFlow=passengerFlow*pow((1+1/1200), gameTime/86400)
-            totalPassenger+=passengerFlow/86400
+        if(interval>=timeDouble){
+            if(gameTime>86400){
+                //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
+                passengerFlow=passengerFlow*(1201/1200)
+                totalPassenger+=passengerFlow/86400
+            }
+            else{
+                totalPassenger+=passengerFlow/86400
+            }
+            
+            let moneyChange=(passengerFlow/86400)*5*Double(scheduleTicketPricePage)-(15*(1+Double(scheduleStopTimePage))*340+800*120)/(3600*120+15*(1+Double(scheduleStopTimePage)))-5700.0/3600
+            
+            //print(passengerFlow)
+            //print(moneyChange)
+            
+            money+=moneyChange
+            
+            timeDouble+=1.0
         }
-        else{
-            totalPassenger+=passengerFlow/86400
-        }
+        
         let formattedPassenger = String(format: "%.0f", totalPassenger)
         passengerLabel.text = formattedPassenger
         
-        let moneyChange=passengerFlow*5*Double(scheduleTicketPricePage)-6200.0/3600
-        money+=moneyChange
         let formattedMoney = String(format: "%.1f", money)
         moneyLabel.text = formattedMoney
         
