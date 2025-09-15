@@ -90,6 +90,15 @@
 		73C51F652CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
 		73C51F662CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
 		73C51F672CFE95A1008DD5C8 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C51F642CFE95A1008DD5C8 /* Button.swift */; };
+		73DC0B6A2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */; };
+		73DC0B6B2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */; };
+		73DC0B6C2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */; };
+		73DC0B6E2E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */; };
+		73DC0B6F2E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */; };
+		73DC0B702E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */; };
+		73DC0B722E608AB200A2C003 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B712E608AB200A2C003 /* Background.swift */; };
+		73DC0B732E608AB200A2C003 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B712E608AB200A2C003 /* Background.swift */; };
+		73DC0B742E608AB200A2C003 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DC0B712E608AB200A2C003 /* Background.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +141,9 @@
 		73C51F4A2CFE94CA008DD5C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		73C51F4C2CFE94CA008DD5C8 /* GameTest_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GameTest_macOS.entitlements; sourceTree = "<group>"; };
 		73C51F642CFE95A1008DD5C8 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beijing_M6_GameScene.swift; sourceTree = "<group>"; };
+		73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Beijing_M6_GameScene.sks; sourceTree = "<group>"; };
+		73DC0B712E608AB200A2C003 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,12 +202,15 @@
 				73A1A2FA2D30F1D800B472C5 /* SettingsSceneA.swift */,
 				73ABC5B72D5AFC4C00315CCC /* Beijing_M11_GameScene.sks */,
 				73ABC5BB2D5AFCC200315CCC /* Beijing_M11_GameScene.swift */,
+				73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */,
+				73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */,
 				7384A0D32DDC1562009025C9 /* Train.swift */,
 				739F6FE22D0B035000F035E1 /* StartUpScene.swift */,
 				739F6FEE2D0B043300F035E1 /* MenuScene.swift */,
 				73C51F642CFE95A1008DD5C8 /* Button.swift */,
 				73951FD92D2CD8C300009527 /* Map.swift */,
 				73ABC5BF2D5B656700315CCC /* GameSceneButtons.swift */,
+				73DC0B712E608AB200A2C003 /* Background.swift */,
 				73C51F1D2CFE94CA008DD5C8 /* Assets.xcassets */,
 			);
 			path = "GameTest Shared";
@@ -350,6 +365,7 @@
 				73C51F2E2CFE94CA008DD5C8 /* Base in Resources */,
 				73ABC5B82D5AFC4C00315CCC /* Beijing_M11_GameScene.sks in Resources */,
 				73A1A2FB2D30F1D800B472C5 /* SettingsSceneA.sks in Resources */,
+				73DC0B6E2E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */,
 				739F6FE72D0B036E00F035E1 /* StartUpScene.sks in Resources */,
 				73C51F562CFE94CA008DD5C8 /* Assets.xcassets in Resources */,
 				73A1A2F62D30EB5000B472C5 /* AchievementsSceneA.sks in Resources */,
@@ -370,6 +386,7 @@
 				73C51F3E2CFE94CA008DD5C8 /* Base in Resources */,
 				73ABC5B92D5AFC4C00315CCC /* Beijing_M11_GameScene.sks in Resources */,
 				73A1A2FC2D30F1D800B472C5 /* SettingsSceneA.sks in Resources */,
+				73DC0B6F2E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */,
 				739F6FE82D0B036E00F035E1 /* StartUpScene.sks in Resources */,
 				73C51F572CFE94CA008DD5C8 /* Assets.xcassets in Resources */,
 				73A1A2F72D30EB5000B472C5 /* AchievementsSceneA.sks in Resources */,
@@ -385,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				737BD8232D0FB28E00D21A3D /* NewGameSceneA.sks in Resources */,
+				73DC0B702E607F3900A2C003 /* Beijing_M6_GameScene.sks in Resources */,
 				73C51F4B2CFE94CA008DD5C8 /* Base in Resources */,
 				73A1A2F82D30EB5000B472C5 /* AchievementsSceneA.sks in Resources */,
 				73A1A2F52D30EB5000B472C5 /* LoadGameSceneA.sks in Resources */,
@@ -410,8 +428,10 @@
 				73C51F282CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
 				739F6FE32D0B035000F035E1 /* StartUpScene.swift in Sources */,
 				73A1A2DE2D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
+				73DC0B722E608AB200A2C003 /* Background.swift in Sources */,
 				739F6FEF2D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BC2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
+				73DC0B6A2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */,
 				73951FDA2D2CD8C300009527 /* Map.swift in Sources */,
 				737BD8252D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */,
 				73A1A2FE2D30F1D800B472C5 /* SettingsSceneA.swift in Sources */,
@@ -432,8 +452,10 @@
 				73C51F382CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
 				739F6FE42D0B035000F035E1 /* StartUpScene.swift in Sources */,
 				73A1A2DF2D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
+				73DC0B732E608AB200A2C003 /* Background.swift in Sources */,
 				739F6FF02D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BD2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
+				73DC0B6B2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */,
 				73951FDB2D2CD8C300009527 /* Map.swift in Sources */,
 				737BD8262D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */,
 				73A1A2FF2D30F1D800B472C5 /* SettingsSceneA.swift in Sources */,
@@ -454,8 +476,10 @@
 				73C51F482CFE94CA008DD5C8 /* GameViewController.swift in Sources */,
 				739F6FE52D0B035000F035E1 /* StartUpScene.swift in Sources */,
 				73A1A2E02D30E0D900B472C5 /* NewGameSceneB.swift in Sources */,
+				73DC0B742E608AB200A2C003 /* Background.swift in Sources */,
 				739F6FF12D0B043300F035E1 /* MenuScene.swift in Sources */,
 				73ABC5BE2D5AFCC200315CCC /* Beijing_M11_GameScene.swift in Sources */,
+				73DC0B6C2E607F1300A2C003 /* Beijing_M6_GameScene.swift in Sources */,
 				73951FDC2D2CD8C300009527 /* Map.swift in Sources */,
 				737BD8272D0FB2AA00D21A3D /* NewGameSceneA.swift in Sources */,
 				73A1A3002D30F1D800B472C5 /* SettingsSceneA.swift in Sources */,

@@ -1,13 +1,21 @@
 //
-//  Beijing_M11_GameScene.swift
+//  Beijing_M6_GameScene.swift
 //  GameTest
 //
-//  Created by H2026160 on 11/2/2025.
+//  Created by H2026160 on 28/8/2025.
 //
 
+import Foundation
 import SpriteKit
 
-class Beijing_M11_GameScene: SKScene{
+class Beijing_M6_GameScene: SKScene{
+    var sceneCamera: SKCameraNode!
+    
+    var targetPosition: CGPoint = .zero
+    var targetScale: CGFloat = 1.0
+    
+    var lastTouchLocation: CGPoint?
+    var lastPinchDistance: CGFloat?
     
     private var MainNode=SKNode()
     private var hasScheduleButton: Bool=true
@@ -15,17 +23,11 @@ class Beijing_M11_GameScene: SKScene{
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
     private var scheduleTicketPricePage: Int=0
-    private var scheduleStopTimePage: Int=0{
-        didSet{
-            stopTimeChanged=true
-        }
-    }
-    //private var scheduleSetupRowNumber: Int=1
+    private var scheduleStopTimePage: Int=0
+    
     private var runGame: Bool=false
     private var startTime: TimeInterval=0
-    //private var pauseStartTime: TimeInterval=0
-    //private var totalTime: TimeInterval=0
-    private var passengerFlow: Double=600.0
+    private var passengerFlow: Double=11300.0
     private var timeDouble: Double=1.0
     private var pauseTime: TimeInterval=1.0
     private var stopTimeChanged: Bool=false
@@ -36,19 +38,16 @@ class Beijing_M11_GameScene: SKScene{
     let passengerLabel=SKLabelNode(text: "0")
     let moneyLabel=SKLabelNode(text: "0")
     
-    let trainNode=SKSpriteNode(color: .black, size: CGSize(width: 100, height: 10))
-   //
-    
     private var gameTime: TimeInterval=0{
         didSet{
             if gameTime>1296000.0{
-                winGame()
+                //winGame()
             }
         }
     }
-    private var money: Double=120000.0{
+    private var money: Double=2150000.0{
         didSet{
-            if money>360000{
+            if money>6450000{
                 winGame()
             }
             if money<=0{
@@ -59,81 +58,47 @@ class Beijing_M11_GameScene: SKScene{
     private var totalPassenger: Double=0.0{
         didSet{
             if totalPassenger>450000{
-                winGame()
+                //winGame()
             }
         }
     }
-
-
     
     override func didMove(to view: SKView) {
+        sceneCamera = SKCameraNode()
+        self.camera = sceneCamera
+        self.addChild(sceneCamera)
+        
+        self.targetPosition = sceneCamera.position
+        self.targetScale = sceneCamera.xScale
+        
         startTime=Date().timeIntervalSinceReferenceDate
         
         timeLabel.position=CGPoint(x: 600, y: 260)
+        timeLabel.zPosition=9
         timeLabel.fontSize=24
         timeLabel.fontColor = .blue
         timeLabel.fontName="Arial-BoldMT"
         addChild(timeLabel)
         
         passengerLabel.position=CGPoint(x: 0, y: 310)
+        passengerLabel.zPosition=9
         passengerLabel.fontSize=24
         passengerLabel.fontColor = .blue
         passengerLabel.fontName="Arial-BoldMT"
         addChild(passengerLabel)
         
         moneyLabel.position=CGPoint(x: 300, y: 310)
+        moneyLabel.zPosition=9
         moneyLabel.fontSize=24
         moneyLabel.fontColor = .blue
         moneyLabel.fontName="Arial-BoldMT"
         addChild(moneyLabel)
         
-        trainNode.position=CGPoint(x: 410, y: 27)
-        addChild(trainNode)
-        
+        setUpBackground()
         setUpButton()
         setUpScheduleButton()
-        
-        startMovement()
+        addChild(MainNode)
     }
-    
-    
-    func startMovement(){
-        
-        
-        if stopTimeChanged{
-            //print("yes")
-            //stopTime=100
-            stopTimeChanged=false
-        }
-        
-        //trainNode.removeAllActions()
-        
-        let ST=SKAction.wait(forDuration: 0.5+0.5*Double(scheduleStopTimePage))
-        //let ST=SKAction.wait(forDuration: 1+1*Double(scheduleStopTimePage))
-        //let ST=SKAction.wait(forDuration: stopTime)
-        let ML1=SKAction.moveBy(x: -275, y: 0, duration: 5)
-        let ML2=SKAction.moveBy(x: -275, y: 0, duration: 5)
-        let ML31=SKAction.moveBy(x: -100, y: 0, duration: 5*100/285)
-        let ML32=SKAction.moveBy(x: -120, y: -15, duration: 5*120/285)
-        let ML33=SKAction.moveBy(x: -5, y: -25, duration: 5*5/285)
-        let ML34=SKAction.moveBy(x: -60, y: 0, duration: 5*60/285)
-        let MR11=SKAction.moveBy(x: 65, y: 0, duration: 5*65/285)
-        let MR12=SKAction.moveBy(x: 120, y: -15, duration: 5*120/285)
-        let MR13=SKAction.moveBy(x: 100, y: 0, duration: 5*100/285)
-        let MR2=SKAction.moveBy(x: 275, y: 0, duration: 5)
-        let MR31=SKAction.moveBy(x: 175, y: 0, duration: 5*175/275)
-        let MR32=SKAction.moveBy(x: 20, y: 55, duration: 5*20/275)
-        let MR33=SKAction.moveBy(x: 80, y: 0, duration: 5*80/275)
-//        let TAL1=SKAction.moveBy(x: -100, y: 0, duration: 1)
-//        let TAL2=SKAction.moveBy(x: -80, y: -25, duration: 1)
-//        let TAL3=SKAction.moveBy(x: 180, y: 0, duration: 1)
-        
-        let loop=SKAction.sequence([ML1,ST,ML2,ST,ML31,ML32,ML33,ML34,ST,MR11,MR12,MR13,ST,MR2,ST,MR31,MR32,MR33,ST])
-        trainNode.run(loop){
-            self.startMovement()
-        }
-    }
-    
     func winGame(){
         let newScene=SKScene(fileNamed: "MenuScene")
         self.view?.presentScene(newScene)
@@ -144,16 +109,18 @@ class Beijing_M11_GameScene: SKScene{
         self.view?.presentScene(newScene)
     }
 }
-extension Beijing_M11_GameScene{
+
+extension Beijing_M6_GameScene{
+    func setUpBackground(){
+        MainNode.addChild(Background(backgroundNum: 2))
+    }
     func setUpButton(){
         for i in 1...4{
             MainNode.addChild(GameSceneButtons(buttonNum: i))
         }
         MainNode.addChild(GameSceneButtons(buttonNum: 25))
         MainNode.addChild(GameSceneButtons(buttonNum: 27))
-        addChild(MainNode)
     }
-    
     func setUpScheduleButton(){
         for i in 6...8{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
@@ -170,16 +137,10 @@ extension Beijing_M11_GameScene{
         for i in 28...29{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
-        //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 32))
-        //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 34))
-
-        //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 23))
         for i in 35...38{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
-
     }
-    
     func updateTime(timePage: Int){
         let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
         
@@ -191,7 +152,6 @@ extension Beijing_M11_GameScene{
         }
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8+timePage))
     }
-    
     func updateDepartureSatation(departureStationPage: Int){
         let departureStationIndicatorLoaction=CGPoint(x: -160, y: 140)
         let terminusStationIndicatorLoaction=CGPoint(x: -20, y: 140)
@@ -303,8 +263,63 @@ extension Beijing_M11_GameScene{
             }
         }
     }
-    
+    override func update(_ currentTime: TimeInterval) {
+        
+        let currentTime=Date().timeIntervalSinceReferenceDate
+        gameTime=(currentTime-startTime)*20
+        let interval=gameTime
+        //print(interval)
+        let formattedTime = String(format: "Time: %.1f", gameTime)
+        timeLabel.text = formattedTime
+        
+        if(interval>=timeDouble){
+            if(gameTime>7200){
+                //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
+                passengerFlow=passengerFlow*pow((1201/1200),20)
+                totalPassenger+=passengerFlow/4320
+            }
+            else{
+                totalPassenger+=passengerFlow/4320
+            }
+            
+            let moneyChange=(passengerFlow/4320)*5*Double(scheduleTicketPricePage)-(15*(1+Double(scheduleStopTimePage))*30+1800*6)/(300*120+(15/20)*(1+Double(scheduleStopTimePage)))-10185.0/18
+            
+            //print(passengerFlow)
+            //print(moneyChange)
+            
+            money+=moneyChange
+            
+            timeDouble+=20.0
+        }
+        
+        let formattedPassenger = String(format: "%.0f", totalPassenger)
+        passengerLabel.text = formattedPassenger
+        
+        let formattedMoney = String(format: "%.1f", money)
+        moneyLabel.text = formattedMoney
+        
+        let easing: CGFloat = 0.05
+                
+        // --- This is the smoothing logic for drag (position) ---
+        sceneCamera.position.x += (targetPosition.x - sceneCamera.position.x) * easing
+        sceneCamera.position.y += (targetPosition.y - sceneCamera.position.y) * easing
+                
+        // --- This is the smoothing logic for zoom (scale) ---
+        sceneCamera.xScale += (targetScale - sceneCamera.xScale) * easing
+        sceneCamera.yScale += (targetScale - sceneCamera.yScale) * easing
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.count == 2 {
+            let touchArray = Array(touches)
+            let touch1 = touchArray[0].location(in: self)
+            let touch2 = touchArray[1].location(in: self)
+            lastPinchDistance = distance(from: touch1, to: touch2)
+                    
+        } else if touches.count == 1 {
+                    // If there is one touch, we're starting a drag gesture.
+            lastTouchLocation = touches.first?.location(in: self)
+        }
+        
         let location=touches.first?.location(in: self)
 //        let backgroundLoaction=CGPoint(x: 0, y: 0)
 //        let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
@@ -381,57 +396,49 @@ extension Beijing_M11_GameScene{
         }
         let normalNodes=nodes(at: location!)
         for node in normalNodes {
-            if node.name=="Pause_Button"{
-                MainNode.addChild(GameSceneButtons(buttonNum: 26))
-                //startTime=Date().timeIntervalSinceReferenceDate
-                runGame=true
-                node.removeFromParent()
-            }
-            if node.name=="Play_Button"{
-                MainNode.addChild(GameSceneButtons(buttonNum: 25))
-                runGame=false
-                node.removeFromParent()
-            }
             if node.name=="Exit_Game_Scene_Button"{
                 let newScene=SKScene(fileNamed: "NewGameSceneA")
                 self.view?.presentScene(newScene)
             }
         }
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-        let currentTime=Date().timeIntervalSinceReferenceDate
-        gameTime=(currentTime-startTime)*20
-        let interval=gameTime
-        //print(interval)
-        let formattedTime = String(format: "Time: %.1f", gameTime)
-        timeLabel.text = formattedTime
-        
-        if(interval>=timeDouble){
-            if(gameTime>7200){
-                //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
-                passengerFlow=passengerFlow*pow((1201/1200),timeDouble/43200)
-                totalPassenger+=passengerFlow/4320
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.count == 1, let touch = touches.first, let lastTouch = lastTouchLocation {
+            if sceneCamera.xScale < 1.0 {
+                let locationInScene = touch.location(in: self)
+                let dx = locationInScene.x - lastTouch.x
+                let dy = locationInScene.y - lastTouch.y
+                
+                // --- We update the targetPosition, not the camera directly ---
+                self.targetPosition.x -= dx
+                self.targetPosition.y -= dy
+                
+                lastTouchLocation = locationInScene
             }
-            else{
-                totalPassenger+=passengerFlow/4320
-            }
+            // --- Handle Zooming (Pinch) ---
+        } else if touches.count == 2 {
+            let touchArray = Array(touches)
+            let touch1 = touchArray[0].location(in: self)
+            let touch2 = touchArray[1].location(in: self)
+            let currentDistance = distance(from: touch1, to: touch2)
             
-            let moneyChange=(passengerFlow/4320)*5*Double(scheduleTicketPricePage)-(15*(1+Double(scheduleStopTimePage))*17+800*6)/(300*120+(15/20)*(1+Double(scheduleStopTimePage)))-5700.0/180
+            guard let lastDistance = lastPinchDistance else { return }
             
-            //print(passengerFlow)
-            //print(moneyChange)
-            
-            money+=moneyChange
-            
-            timeDouble+=20.0
+            let scaleFactor = currentDistance / lastDistance
+            self.targetScale /= scaleFactor
+            lastPinchDistance = currentDistance
         }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+            // Reset the touch variables when the user lifts their fingers
+        lastTouchLocation = nil
+        lastPinchDistance = nil
+    }
         
-        let formattedPassenger = String(format: "%.0f", totalPassenger)
-        passengerLabel.text = formattedPassenger
-        
-        let formattedMoney = String(format: "%.1f", money)
-        moneyLabel.text = formattedMoney
-        
+        // A helper function to calculate the distance between two points
+    func distance(from point1: CGPoint, to point2: CGPoint) -> CGFloat {
+        let dx = point2.x - point1.x
+        let dy = point2.y - point1.y
+        return sqrt(dx*dx + dy*dy)
     }
 }

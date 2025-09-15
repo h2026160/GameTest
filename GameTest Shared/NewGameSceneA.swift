@@ -74,6 +74,10 @@ extension NewGameSceneA {
                 let newScene=SKScene(fileNamed: "Beijing_M11_GameScene")
                 self.view?.presentScene(newScene)
             }
+            if node.name=="Beijing_M6_Button"{
+                let newScene=SKScene(fileNamed: "Beijing_M6_GameScene")
+                self.view?.presentScene(newScene)
+            }
         }
     }
     

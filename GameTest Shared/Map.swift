@@ -41,8 +41,8 @@ extension Map{
             mapNode.position=CGPoint(x: -480, y: 0)
         }
         if(mapIndex==2){
-            mapNode=SKSpriteNode(imageNamed: "MTR_East_Rail")
-            mapNode.name="MTR_East_Rail_Button"
+            mapNode=SKSpriteNode(imageNamed: "Beijing_M6")
+            mapNode.name="Beijing_M6_Button"
             mapNode.xScale=0.6
             mapNode.yScale=0.6
             mapNode.position=CGPoint(x: -160, y: 0)
