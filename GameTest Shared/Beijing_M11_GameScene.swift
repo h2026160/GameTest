@@ -32,6 +32,8 @@ class Beijing_M11_GameScene: SKScene{
     
     private var stopTime: TimeInterval=1
     
+    private var passengersStartStation: [Int]=[]
+    
     let timeLabel=SKLabelNode(text: "Time:0")
     let passengerLabel=SKLabelNode(text: "0")
     let moneyLabel=SKLabelNode(text: "0")
@@ -56,10 +58,23 @@ class Beijing_M11_GameScene: SKScene{
             }
         }
     }
+    
+    private var lastWholePassengerCount: Int = 0
+    
     private var totalPassenger: Double=0.0{
         didSet{
             if totalPassenger>450000{
                 winGame()
+            }
+            let currentWholeNumber = Int(totalPassenger)
+            if currentWholeNumber > lastWholePassengerCount {
+                for _ in lastWholePassengerCount..<currentWholeNumber {
+                    let newPassenger = Passenger(code: generateRandomCode())
+                    
+                    passengersStartStation.append(newPassenger.getStartStation())
+                    print(passengersStartStation)
+                }
+            lastWholePassengerCount = currentWholeNumber
             }
         }
     }
@@ -433,5 +448,23 @@ extension Beijing_M11_GameScene{
         let formattedMoney = String(format: "%.1f", money)
         moneyLabel.text = formattedMoney
         
+    }
+    
+    func generateRandomCode() -> String {
+        // Define the set of all characters to use
+        let characters = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};:'\"\\|,.<>/?`~"
+        
+        // Define the desired length of the name
+        let nameLength = Int.random(in: 10...20) // Random length between 10 and 20
+        
+        // Build the string by picking a random character for each position
+        var randomString = ""
+        for _ in 0..<nameLength {
+            if let randomCharacter = characters.randomElement() {
+                randomString.append(randomCharacter)
+            }
+        }
+        
+        return randomString
     }
 }

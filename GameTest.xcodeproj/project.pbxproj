@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		733389A02E77EAE300990B03 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333899F2E77EAE300990B03 /* Passenger.swift */; };
+		733389A12E77EAE300990B03 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333899F2E77EAE300990B03 /* Passenger.swift */; };
+		733389A22E77EAE300990B03 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333899F2E77EAE300990B03 /* Passenger.swift */; };
 		737BD8212D0FB28E00D21A3D /* NewGameSceneA.sks in Resources */ = {isa = PBXBuildFile; fileRef = 737BD8202D0FB28E00D21A3D /* NewGameSceneA.sks */; };
 		737BD8222D0FB28E00D21A3D /* NewGameSceneA.sks in Resources */ = {isa = PBXBuildFile; fileRef = 737BD8202D0FB28E00D21A3D /* NewGameSceneA.sks */; };
 		737BD8232D0FB28E00D21A3D /* NewGameSceneA.sks in Resources */ = {isa = PBXBuildFile; fileRef = 737BD8202D0FB28E00D21A3D /* NewGameSceneA.sks */; };
@@ -102,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7333899F2E77EAE300990B03 /* Passenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passenger.swift; sourceTree = "<group>"; };
 		737BD8202D0FB28E00D21A3D /* NewGameSceneA.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = NewGameSceneA.sks; sourceTree = "<group>"; };
 		737BD8242D0FB2AA00D21A3D /* NewGameSceneA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameSceneA.swift; sourceTree = "<group>"; };
 		7384A0D32DDC1562009025C9 /* Train.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				73DC0B6D2E607F3900A2C003 /* Beijing_M6_GameScene.sks */,
 				73DC0B692E607F1200A2C003 /* Beijing_M6_GameScene.swift */,
 				7384A0D32DDC1562009025C9 /* Train.swift */,
+				7333899F2E77EAE300990B03 /* Passenger.swift */,
 				739F6FE22D0B035000F035E1 /* StartUpScene.swift */,
 				739F6FEE2D0B043300F035E1 /* MenuScene.swift */,
 				73C51F642CFE95A1008DD5C8 /* Button.swift */,
@@ -438,6 +443,7 @@
 				73C51F262CFE94CA008DD5C8 /* AppDelegate.swift in Sources */,
 				73ABC5C02D5B656700315CCC /* GameSceneButtons.swift in Sources */,
 				73C51F652CFE95A1008DD5C8 /* Button.swift in Sources */,
+				733389A02E77EAE300990B03 /* Passenger.swift in Sources */,
 				73A1A2EA2D30EB5000B472C5 /* LoadGameSceneA.swift in Sources */,
 				7384A0D42DDC1562009025C9 /* Train.swift in Sources */,
 				73A1A2F02D30EB5000B472C5 /* AchievementsSceneA.swift in Sources */,
@@ -462,6 +468,7 @@
 				73C51F362CFE94CA008DD5C8 /* AppDelegate.swift in Sources */,
 				73ABC5C12D5B656700315CCC /* GameSceneButtons.swift in Sources */,
 				73C51F662CFE95A1008DD5C8 /* Button.swift in Sources */,
+				733389A12E77EAE300990B03 /* Passenger.swift in Sources */,
 				73A1A2EB2D30EB5000B472C5 /* LoadGameSceneA.swift in Sources */,
 				7384A0D52DDC1562009025C9 /* Train.swift in Sources */,
 				73A1A2F12D30EB5000B472C5 /* AchievementsSceneA.swift in Sources */,
@@ -486,6 +493,7 @@
 				73C51F462CFE94CA008DD5C8 /* AppDelegate.swift in Sources */,
 				73ABC5C22D5B656700315CCC /* GameSceneButtons.swift in Sources */,
 				73C51F672CFE95A1008DD5C8 /* Button.swift in Sources */,
+				733389A22E77EAE300990B03 /* Passenger.swift in Sources */,
 				73A1A2EC2D30EB5000B472C5 /* LoadGameSceneA.swift in Sources */,
 				7384A0D62DDC1562009025C9 /* Train.swift in Sources */,
 				73A1A2F22D30EB5000B472C5 /* AchievementsSceneA.swift in Sources */,
