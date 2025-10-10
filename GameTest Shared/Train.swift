@@ -2,27 +2,37 @@
 //  Train.swift
 //  GameTest
 //
-//  Created by H2026160 on 20/5/2025.
+//  Created by H2026160 on 19/9/2025.
 //
 
 import Foundation
 import SpriteKit
 
-class Train:SKNode{
-    private var isRunning: Bool=false
-    private var trainNumber: Int
-    private var trainNode: SKSpriteNode!
+class Train{
+    private var code: String
+    private var departureTime: Int=0
+    private var startStation: String=""
+    private var endStation: String=""
+    private var passengerNumber: Int=0
     
-    init(trainNumber: Int, trainNode: SKSpriteNode!) {
-        self.trainNumber = trainNumber
-        self.trainNode = trainNode
-        
-        super.init()
-        
-        self.zPosition=9.0
+    init(code: String) {
+        self.code = code
+    }
+}
+
+extension Train{
+    func changeStartStation(stationName: String){
+        startStation=stationName
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func changeTerminusStation(stationName: String){
+        endStation=stationName
+    }
+    
+    func changeDepartureTime(timePoint: Int){
+        departureTime=timePoint
+    }
+    func call(){
+        print(self.endStation)
     }
 }
