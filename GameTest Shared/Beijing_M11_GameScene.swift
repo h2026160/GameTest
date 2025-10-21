@@ -32,8 +32,8 @@ class Beijing_M11_GameScene: SKScene{
     private var startTime: TimeInterval=0
     //private var pauseStartTime: TimeInterval=0
     //private var totalTime: TimeInterval=0
-    private var passengerFlow: Double=600.0
-    private var timeDouble: Double=1.0
+    private var passengerFlow: Double=5000.0/43200.0
+    private var timeDouble: Double=20.0
     private var pauseTime: TimeInterval=1.0
     private var stopTimeChanged: Bool=false
     
@@ -77,8 +77,12 @@ class Beijing_M11_GameScene: SKScene{
             let currentWholeNumber = Int(totalPassenger)
             if currentWholeNumber > lastWholePassengerCount {
                 for _ in lastWholePassengerCount..<currentWholeNumber {
-                    passengers.append(Passenger(code: generateRandomCode()))
+                    let newPassenger=Passenger(code: generateRandomCode())
+                    passengers.append(newPassenger)
+                    
+                    money+=(Double(newPassenger.getTicketPrice())+5.0)*(2.0+Double(scheduleTicketPricePage))
                     //print(passengersStartStation)
+                    
                 }
             lastWholePassengerCount = currentWholeNumber
             }
@@ -134,19 +138,19 @@ class Beijing_M11_GameScene: SKScene{
         let ST=SKAction.wait(forDuration: 0.5+0.5*Double(scheduleStopTimePage))
         //let ST=SKAction.wait(forDuration: 1+1*Double(scheduleStopTimePage))
         //let ST=SKAction.wait(forDuration: stopTime)
-        let ML1=SKAction.moveBy(x: -275, y: 0, duration: 5)
-        let ML2=SKAction.moveBy(x: -275, y: 0, duration: 5)
-        let ML31=SKAction.moveBy(x: -100, y: 0, duration: 5*100/285)
-        let ML32=SKAction.moveBy(x: -120, y: -15, duration: 5*120/285)
-        let ML33=SKAction.moveBy(x: -5, y: -25, duration: 5*5/285)
-        let ML34=SKAction.moveBy(x: -60, y: 0, duration: 5*60/285)
-        let MR11=SKAction.moveBy(x: 65, y: 0, duration: 5*65/285)
-        let MR12=SKAction.moveBy(x: 120, y: -15, duration: 5*120/285)
-        let MR13=SKAction.moveBy(x: 100, y: 0, duration: 5*100/285)
-        let MR2=SKAction.moveBy(x: 275, y: 0, duration: 5)
-        let MR31=SKAction.moveBy(x: 175, y: 0, duration: 5*175/275)
-        let MR32=SKAction.moveBy(x: 20, y: 55, duration: 5*20/275)
-        let MR33=SKAction.moveBy(x: 80, y: 0, duration: 5*80/275)
+        let ML1=SKAction.moveBy(x: -275, y: 0, duration: 9)
+        let ML2=SKAction.moveBy(x: -275, y: 0, duration: 9)
+        let ML31=SKAction.moveBy(x: -100, y: 0, duration: 9*100/285)
+        let ML32=SKAction.moveBy(x: -120, y: -15, duration: 9*120/285)
+        let ML33=SKAction.moveBy(x: -5, y: -25, duration: 9*5/285)
+        let ML34=SKAction.moveBy(x: -60, y: 0, duration: 9*60/285)
+        let MR11=SKAction.moveBy(x: 65, y: 0, duration: 9*65/285)
+        let MR12=SKAction.moveBy(x: 120, y: -15, duration: 9*120/285)
+        let MR13=SKAction.moveBy(x: 100, y: 0, duration: 9*100/285)
+        let MR2=SKAction.moveBy(x: 275, y: 0, duration: 9)
+        let MR31=SKAction.moveBy(x: 175, y: 0, duration: 9*175/275)
+        let MR32=SKAction.moveBy(x: 20, y: 55, duration: 9*20/275)
+        let MR33=SKAction.moveBy(x: 80, y: 0, duration: 9*80/275)
 //        let TAL1=SKAction.moveBy(x: -100, y: 0, duration: 1)
 //        let TAL2=SKAction.moveBy(x: -80, y: -25, duration: 1)
 //        let TAL3=SKAction.moveBy(x: 180, y: 0, duration: 1)
@@ -499,21 +503,21 @@ extension Beijing_M11_GameScene{
         if(interval>=timeDouble){
             if(gameTime>7200){
                 //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
-                passengerFlow=passengerFlow*pow((1201/1200),timeDouble/43200)
-                totalPassenger+=passengerFlow/4320
+                passengerFlow=passengerFlow*pow((24948101/24948100),timeDouble)
+                totalPassenger+=passengerFlow
             }
             else{
-                totalPassenger+=passengerFlow/4320
+                totalPassenger+=passengerFlow
             }
             
-            let moneyChange=(passengerFlow/4320)*5*Double(scheduleTicketPricePage)-(15*(1+Double(scheduleStopTimePage))*17+800*6)/(300*120+(15/20)*(1+Double(scheduleStopTimePage)))-5700.0/180
+            let moneyChange=20.0*((passengerFlow)*5*(2+Double(scheduleTicketPricePage))-(1000.0/3600.0*15.0*(1+Double(scheduleStopTimePage))+1900.0/3600.0*180.0)/(15.0*(1+Double(scheduleStopTimePage))+180.0)-3800.0/3600.0-1500.0*Double(trains.count)/3600.0)
             
             //print(passengerFlow)
             //print(moneyChange)
             
             money+=moneyChange
             
-            timeDouble+=1.0
+            timeDouble+=20.0
         }
         
         let formattedPassenger = String(format: "%.0f", totalPassenger)
