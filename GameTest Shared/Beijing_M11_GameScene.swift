@@ -13,13 +13,16 @@ class Beijing_M11_GameScene: SKScene{
     private var hasScheduleButton: Bool=true
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
     
-    private var trainNum: Int=1
+    private var scheduleButtonPages: [SKNode]=[SKNode(),SKNode(),SKNode(),SKNode(),SKNode()]
+    private var schedulePage: Int=1
+    
+    private var serviceNum: [Int]=[1,1,1,1,1]
     
 //    private var scheduleTimePage: Int=0
 //    private var scheduleDepartureStationPage: Int=0
     
-    private var scheduleTimePage: [Int]=[0]
-    private var scheduleDepartureStationPage: [Int]=[0]
+    private var scheduleTimePage: [[Int]]=[[0],[0],[0],[0],[0]]
+    private var scheduleDepartureStationPage: [[Int]]=[[0],[0],[0],[0],[0]]
     
     private var scheduleTicketPricePage: Int=0
     private var scheduleStopTimePage: Int=0{
@@ -208,23 +211,59 @@ extension Beijing_M11_GameScene{
         for i in 35...38{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 1, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 2, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 3, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 4, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 5, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 6, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 7, buttonRowCount: trainNum))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: trainNum))
+        
+        for i in 1...5{
+            for j in 1...8{
+                scheduleButtonPages[i-1].addChild(GameSceneButtons(buttonNum: j, buttonRowCount: serviceNum[i-1],buttonPageNum: i))
+            }
+        }
+        
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 1, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 2, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 3, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 4, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 5, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 6, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 7, buttonRowCount: trainNum))
+//        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: trainNum))
+        
+        scheduleButtonBackground.addChild(scheduleButtonPages[0])
+        
+        for i in 43...47{
+            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
+        }
 
     }
     
+    func updateTrainSelection(trainSelectionPage: Int){
+        let oldTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*schedulePage)
+        let newTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*trainSelectionPage)
+        
+        let nodesA=nodes(at: oldTrainIndicatorLocation)
+        for node in nodesA {
+            if (node.name=="M11_Train_\(schedulePage)(H)"){
+                node.removeFromParent()
+                scheduleButtonPages[schedulePage-1].removeFromParent()
+            }
+        }
+        let nodesB=nodes(at: newTrainIndicatorLocation)
+        for node in nodesB {
+            if (node.name=="M11_Train_\(trainSelectionPage)"){
+                node.removeFromParent()
+            }
+        }
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 41+schedulePage))
+        schedulePage=trainSelectionPage
+        scheduleButtonBackground.addChild(scheduleButtonPages[trainSelectionPage-1])
+        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 46+trainSelectionPage))
+    }
+    
     func updateAddButton(trainNumber: Int){
-        let addIndicatorLocation=CGPoint(x: -380, y: 140-110*trainNum)
+        let addIndicatorLocation=CGPoint(x: -380, y: 140-110*serviceNum[schedulePage-1])
         
         let nodes=nodes(at: addIndicatorLocation)
         for node in nodes {
-            if (node.name=="Add_Button") {
+            if (node.name=="Add_Button-\(schedulePage)") {
                 node.removeFromParent()
             }
         }
@@ -238,12 +277,12 @@ extension Beijing_M11_GameScene{
         
         let nodes=nodes(at: timeIndicatorLoaction)
         for node in nodes {
-            if (node.name=="Initial_Time\(buttonRow)")||(node.name=="Time(1)\(buttonRow)")||(node.name=="Time(2)\(buttonRow)")||(node.name=="Time(3)\(buttonRow)"){
+            if (node.name=="Initial_Time\(buttonRow)-\(schedulePage)")||(node.name=="Time(1)\(buttonRow)-\(schedulePage)")||(node.name=="Time(2)\(buttonRow)-\(schedulePage)")||(node.name=="Time(3)\(buttonRow)-\(schedulePage)"){
                 node.removeFromParent()
             }
         }
         //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8+timePage))
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8+timePage, buttonRowCount: buttonRow))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 8+timePage, buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
     func updateDepartureSatation(departureStationPage: Int,buttonRow: Int){
@@ -263,19 +302,19 @@ extension Beijing_M11_GameScene{
         
         let nodesA=nodes(at: departureStationIndicatorLoaction)
         for node in nodesA {
-            if (node.name=="Initial_Departure_Station\(buttonRow)")||(node.name=="Moshikou_Station\(buttonRow)")||(node.name=="Shougang_Park_Station\(buttonRow)"){
+            if (node.name=="Initial_Departure_Station\(buttonRow)-\(schedulePage)")||(node.name=="Moshikou_Station\(buttonRow)-\(schedulePage)")||(node.name=="Shougang_Park_Station\(buttonRow)-\(schedulePage)"){
                 node.removeFromParent()
             }
         }
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 11+departureStationPage,buttonRowCount: buttonRow))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 11+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
         
         let nodesB=nodes(at: terminusStationIndicatorLoaction)
         for node in nodesB {
-            if (node.name=="Initial_Terminus_Station\(buttonRow)")||(node.name=="Moshikou_Station\(buttonRow)")||(node.name=="Shougang_Park_Station\(buttonRow)"){
+            if (node.name=="Initial_Terminus_Station\(buttonRow)-\(schedulePage)")||(node.name=="Moshikou_Station\(buttonRow)-\(schedulePage)")||(node.name=="Shougang_Park_Station\(buttonRow)-\(schedulePage)"){
                 node.removeFromParent()
             }
         }
-        scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 13+departureStationPage,buttonRowCount: buttonRow))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 13+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
     func updateTicketPrice(ticketPricePage: Int){
@@ -394,29 +433,53 @@ extension Beijing_M11_GameScene{
             }
             else{
                 let nodesA=nodes(at: location!)
-                for node in nodesA {
-                    for i in 1...trainNum{
-                        if (node.name=="Next_Time_Button\(i)")&&(scheduleTimePage[i-1]<3){
-                            scheduleTimePage[i-1]+=1
-                            updateTime(timePage: scheduleTimePage[i-1],buttonRow: i)
+                
+                for node in nodesA{
+                    for j in 1...5 {
+                        for i in 1...serviceNum[schedulePage-1]{
+                            if (node.name=="Next_Time_Button\(i)-\(j)")&&(scheduleTimePage[j-1][i-1]<3){
+                                scheduleTimePage[j-1][i-1]+=1
+                                updateTime(timePage: scheduleTimePage[j-1][i-1],buttonRow: i)
+                            }
                         }
-                    }
-                    for i in 1...trainNum{
-                        if (node.name=="Previous_Time_Button\(i)")&&(scheduleTimePage[i-1]>1){
-                            scheduleTimePage[i-1]-=1
-                            updateTime(timePage: scheduleTimePage[i-1],buttonRow: i)
+                        for i in 1...serviceNum[schedulePage-1]{
+                            if (node.name=="Previous_Time_Button\(i)-\(j)")&&(scheduleTimePage[j-1][i-1]>1){
+                                scheduleTimePage[j-1][i-1]-=1
+                                updateTime(timePage: scheduleTimePage[j-1][i-1],buttonRow: i)
+                            }
                         }
-                    }
-                    for i in 1...trainNum{
-                        if (node.name=="Next_Departure_Station_Button\(i)")&&(scheduleDepartureStationPage[i-1]<2){
-                            scheduleDepartureStationPage[i-1]+=1
-                            updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[i-1],buttonRow: i)
+                        for i in 1...serviceNum[schedulePage-1]{
+                            if (node.name=="Next_Departure_Station_Button\(i)-\(j)")&&(scheduleDepartureStationPage[j-1][i-1]<2){
+                                scheduleDepartureStationPage[j-1][i-1]+=1
+                                updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
+                            }
                         }
-                    }
-                    for i in 1...trainNum{
-                        if (node.name=="Previous_Departure_Station_Button\(i)")&&(scheduleDepartureStationPage[i-1]>1){
-                            scheduleDepartureStationPage[i-1]-=1
-                            updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[i-1],buttonRow: i)
+                        for i in 1...serviceNum[schedulePage-1]{
+                            if (node.name=="Previous_Departure_Station_Button\(i)-\(j)")&&(scheduleDepartureStationPage[j-1][i-1]>1){
+                                scheduleDepartureStationPage[j-1][i-1]-=1
+                                updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
+                            }
+                        }
+                        if node.name=="Add_Button-\(j)"{
+                            
+                            //print("called")
+                            
+                            updateAddButton(trainNumber: serviceNum[schedulePage-1])
+                            if(serviceNum[schedulePage-1]<4){
+                                serviceNum[schedulePage-1]+=1
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 1, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 2, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 3, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 4, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 5, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 6, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 7, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
+                                scheduleTimePage[j-1].append(0)
+                                scheduleDepartureStationPage[j-1].append(0)
+                                
+                                trains.append(Train(code: generateRandomCode()))
+                            }
                         }
                     }
                     if (node.name=="Next_Ticket_Price_Button")&&(scheduleTicketPricePage<2){
@@ -435,30 +498,88 @@ extension Beijing_M11_GameScene{
                         scheduleStopTimePage-=1
                         updateStopTime(stopTimePage: scheduleStopTimePage)
                     }
-                    if node.name=="Yes_Button"{
-                        clearButtons()
+                    if (node.name=="M11_Train_1"){
+                        updateTrainSelection(trainSelectionPage: 1)
                     }
-                    if node.name=="Add_Button"{
-                        updateAddButton(trainNumber: trainNum)
-                        if(trainNum<4){
-                            trainNum+=1
-                            if(trainNum<4){
-                                scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 1, buttonRowCount: trainNum))
-                            }
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 2, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 3, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 4, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 5, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 6, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 7, buttonRowCount: trainNum))
-                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: trainNum))
-                            scheduleTimePage.append(0)
-                            scheduleDepartureStationPage.append(0)
-                            
-                            trains.append(Train(code: generateRandomCode()))
-                        }
+                    if (node.name=="M11_Train_2"){
+                        updateTrainSelection(trainSelectionPage: 2)
+                    }
+                    if (node.name=="M11_Train_3"){
+                        updateTrainSelection(trainSelectionPage: 3)
+                    }
+                    if (node.name=="M11_Train_4"){
+                        updateTrainSelection(trainSelectionPage: 4)
+                    }
+                    if (node.name=="M11_Train_5"){
+                        updateTrainSelection(trainSelectionPage: 5)
                     }
                 }
+                
+                //for node in nodesA {
+//                    for i in 1...trainNum{
+//                        if (node.name=="Next_Time_Button\(i)")&&(scheduleTimePage[i-1]<3){
+//                            scheduleTimePage[i-1]+=1
+//                            updateTime(timePage: scheduleTimePage[i-1],buttonRow: i)
+//                        }
+//                    }
+//                    for i in 1...trainNum{
+//                        if (node.name=="Previous_Time_Button\(i)")&&(scheduleTimePage[i-1]>1){
+//                            scheduleTimePage[i-1]-=1
+//                            updateTime(timePage: scheduleTimePage[i-1],buttonRow: i)
+//                        }
+//                    }
+//                    for i in 1...trainNum{
+//                        if (node.name=="Next_Departure_Station_Button\(i)")&&(scheduleDepartureStationPage[i-1]<2){
+//                            scheduleDepartureStationPage[i-1]+=1
+//                            updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[i-1],buttonRow: i)
+//                        }
+//                    }
+//                    for i in 1...trainNum{
+//                        if (node.name=="Previous_Departure_Station_Button\(i)")&&(scheduleDepartureStationPage[i-1]>1){
+//                            scheduleDepartureStationPage[i-1]-=1
+//                            updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[i-1],buttonRow: i)
+//                        }
+//                    }
+//                    if (node.name=="Next_Ticket_Price_Button")&&(scheduleTicketPricePage<2){
+//                        scheduleTicketPricePage+=1
+//                        updateTicketPrice(ticketPricePage: scheduleTicketPricePage)
+//                    }
+//                    if (node.name=="Previous_Ticket_Price_Button")&&(scheduleTicketPricePage>1){
+//                        scheduleTicketPricePage-=1
+//                        updateTicketPrice(ticketPricePage: scheduleTicketPricePage)
+//                    }
+//                    if (node.name=="Next_Stop_Time_Button")&&(scheduleStopTimePage<3){
+//                        scheduleStopTimePage+=1
+//                        updateStopTime(stopTimePage: scheduleStopTimePage)
+//                    }
+//                    if (node.name=="Previous_Stop_Time_Button")&&(scheduleStopTimePage>1){
+//                        scheduleStopTimePage-=1
+//                        updateStopTime(stopTimePage: scheduleStopTimePage)
+//                    }
+//                    if node.name=="Yes_Button"{
+//                        clearButtons()
+//                    }
+//                    if node.name=="Add_Button"{
+//                        updateAddButton(trainNumber: trainNum)
+//                        if(trainNum<4){
+//                            trainNum+=1
+//                            if(trainNum<4){
+//                                scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 1, buttonRowCount: trainNum))
+//                            }
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 2, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 3, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 4, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 5, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 6, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 7, buttonRowCount: trainNum))
+//                            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: trainNum))
+//                            scheduleTimePage.append(0)
+//                            scheduleDepartureStationPage.append(0)
+//                            
+//                            trains.append(Train(code: generateRandomCode()))
+//                        }
+//                    }
+                //}
             }
         }
         else{
