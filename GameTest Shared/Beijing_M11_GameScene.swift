@@ -45,11 +45,13 @@ class Beijing_M11_GameScene: SKScene{
     private var passengers: [Passenger]=[]
     private var trains: [Train]=[]
     
+    
+    
     let timeLabel=SKLabelNode(text: "Time:0")
     let passengerLabel=SKLabelNode(text: "0")
     let moneyLabel=SKLabelNode(text: "0")
     
-    let trainNode=SKSpriteNode(color: .black, size: CGSize(width: 100, height: 10))
+    //let trainNode=SKSpriteNode(color: .black, size: CGSize(width: 100, height: 10))
    //
     
     private var gameTime: TimeInterval=0{
@@ -115,54 +117,51 @@ class Beijing_M11_GameScene: SKScene{
         moneyLabel.fontName="Arial-BoldMT"
         addChild(moneyLabel)
         
-        trainNode.position=CGPoint(x: 410, y: 27)
-        addChild(trainNode)
+//        trainNode.position=CGPoint(x: 410, y: 27)
+//        addChild(trainNode)
         
-        trains.append(Train(code: generateRandomCode()))
+        setUpTrains()
         
         setUpButton()
         setUpScheduleButton()
         
-        startMovement()
+        //startMovement()
     }
     
     
-    func startMovement(){
-        
-        
-        if stopTimeChanged{
-            //print("yes")
-            //stopTime=100
-            stopTimeChanged=false
-        }
-        
-        //trainNode.removeAllActions()
-        
-        let ST=SKAction.wait(forDuration: 0.5+0.5*Double(scheduleStopTimePage))
-        //let ST=SKAction.wait(forDuration: 1+1*Double(scheduleStopTimePage))
-        //let ST=SKAction.wait(forDuration: stopTime)
-        let ML1=SKAction.moveBy(x: -275, y: 0, duration: 9)
-        let ML2=SKAction.moveBy(x: -275, y: 0, duration: 9)
-        let ML31=SKAction.moveBy(x: -100, y: 0, duration: 9*100/285)
-        let ML32=SKAction.moveBy(x: -120, y: -15, duration: 9*120/285)
-        let ML33=SKAction.moveBy(x: -5, y: -25, duration: 9*5/285)
-        let ML34=SKAction.moveBy(x: -60, y: 0, duration: 9*60/285)
-        let MR11=SKAction.moveBy(x: 65, y: 0, duration: 9*65/285)
-        let MR12=SKAction.moveBy(x: 120, y: -15, duration: 9*120/285)
-        let MR13=SKAction.moveBy(x: 100, y: 0, duration: 9*100/285)
-        let MR2=SKAction.moveBy(x: 275, y: 0, duration: 9)
-        let MR31=SKAction.moveBy(x: 175, y: 0, duration: 9*175/275)
-        let MR32=SKAction.moveBy(x: 20, y: 55, duration: 9*20/275)
-        let MR33=SKAction.moveBy(x: 80, y: 0, duration: 9*80/275)
-//        let TAL1=SKAction.moveBy(x: -100, y: 0, duration: 1)
-//        let TAL2=SKAction.moveBy(x: -80, y: -25, duration: 1)
-//        let TAL3=SKAction.moveBy(x: 180, y: 0, duration: 1)
-        
-        let loop=SKAction.sequence([ML1,ST,ML2,ST,ML31,ML32,ML33,ML34,ST,MR11,MR12,MR13,ST,MR2,ST,MR31,MR32,MR33,ST])
-        trainNode.run(loop){
-            self.startMovement()
-        }
-    }
+//    func startMovement(){
+//        
+//        
+//        if stopTimeChanged{
+//            //print("yes")
+//            //stopTime=100
+//            stopTimeChanged=false
+//        }
+//        
+//        //trainNode.removeAllActions()
+//        
+//        let ST=SKAction.wait(forDuration: 0.5+0.5*Double(scheduleStopTimePage))
+//        //let ST=SKAction.wait(forDuration: 1+1*Double(scheduleStopTimePage))
+//        //let ST=SKAction.wait(forDuration: stopTime)
+//        let ML1=SKAction.moveBy(x: -275, y: 0, duration: 9)
+//        let ML2=SKAction.moveBy(x: -275, y: 0, duration: 9)
+//        let ML31=SKAction.moveBy(x: -100, y: 0, duration: 9*100/285)
+//        let ML32=SKAction.moveBy(x: -120, y: -15, duration: 9*120/285)
+//        let ML33=SKAction.moveBy(x: -5, y: -25, duration: 9*5/285)
+//        let ML34=SKAction.moveBy(x: -60, y: 0, duration: 9*60/285)
+//        let MR11=SKAction.moveBy(x: 65, y: 0, duration: 9*65/285)
+//        let MR12=SKAction.moveBy(x: 120, y: -15, duration: 9*120/285)
+//        let MR13=SKAction.moveBy(x: 100, y: 0, duration: 9*100/285)
+//        let MR2=SKAction.moveBy(x: 275, y: 0, duration: 9)
+//        let MR31=SKAction.moveBy(x: 175, y: 0, duration: 9*175/275)
+//        let MR32=SKAction.moveBy(x: 20, y: 55, duration: 9*20/275)
+//        let MR33=SKAction.moveBy(x: 80, y: 0, duration: 9*80/275)
+//        
+//        let loop=SKAction.sequence([ML1,ST,ML2,ST,ML31,ML32,ML33,ML34,ST,MR11,MR12,MR13,ST,MR2,ST,MR31,MR32,MR33,ST])
+//        trainNode.run(loop){
+//            self.startMovement()
+//        }
+//    }
     
     func winGame(){
         let newScene=SKScene(fileNamed: "MenuScene")
@@ -235,6 +234,15 @@ extension Beijing_M11_GameScene{
 
     }
     
+    func setUpTrains(){
+        for i in 11001...11005{
+            trains.append(Train(code: "\(i)"))
+        }
+        
+        MainNode.addChild(trains[0])
+        trains[0].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+    }
+    
     func updateTrainSelection(trainSelectionPage: Int){
         let oldTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*schedulePage)
         let newTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*trainSelectionPage)
@@ -271,7 +279,7 @@ extension Beijing_M11_GameScene{
     
     func updateTime(timePage: Int,buttonRow: Int){
         
-        trains[buttonRow-1].changeDepartureTime(timePoint: 6*timePage)
+        //trains[buttonRow-1].changeDepartureTime(timePoint: 6*timePage)
         
         let timeIndicatorLoaction=CGPoint(x: -300, y: 250-110*buttonRow)
         
@@ -287,14 +295,14 @@ extension Beijing_M11_GameScene{
     
     func updateDepartureSatation(departureStationPage: Int,buttonRow: Int){
         
-        if departureStationPage==1{
-            trains[buttonRow-1].changeStartStation(stationName: "Moshikou")
-            trains[buttonRow-1].changeTerminusStation(stationName: "Shougang_Park")
-        }
-        else if departureStationPage==2{
-            trains[buttonRow-1].changeStartStation(stationName: "Shougang_Park")
-            trains[buttonRow-1].changeTerminusStation(stationName: "Moshikou")
-        }
+//        if departureStationPage==1{
+//            trains[buttonRow-1].changeStartStation(stationName: "Moshikou")
+//            trains[buttonRow-1].changeTerminusStation(stationName: "Shougang_Park")
+//        }
+//        else if departureStationPage==2{
+//            trains[buttonRow-1].changeStartStation(stationName: "Shougang_Park")
+//            trains[buttonRow-1].changeTerminusStation(stationName: "Moshikou")
+//        }
         
         
         let departureStationIndicatorLoaction=CGPoint(x: -160, y: 250-110*buttonRow)
@@ -461,9 +469,6 @@ extension Beijing_M11_GameScene{
                             }
                         }
                         if node.name=="Add_Button-\(j)"{
-                            
-                            //print("called")
-                            
                             updateAddButton(trainNumber: serviceNum[schedulePage-1])
                             if(serviceNum[schedulePage-1]<4){
                                 serviceNum[schedulePage-1]+=1
@@ -477,8 +482,6 @@ extension Beijing_M11_GameScene{
                                 scheduleButtonPages[j-1].addChild(GameSceneButtons(buttonNum: 8, buttonRowCount: serviceNum[schedulePage-1], buttonPageNum: j))
                                 scheduleTimePage[j-1].append(0)
                                 scheduleDepartureStationPage[j-1].append(0)
-                                
-                                trains.append(Train(code: generateRandomCode()))
                             }
                         }
                     }
@@ -503,15 +506,34 @@ extension Beijing_M11_GameScene{
                     }
                     if (node.name=="M11_Train_2"){
                         updateTrainSelection(trainSelectionPage: 2)
+                        
+                        MainNode.addChild(trains[1])
+                        trains[1].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+                        
                     }
                     if (node.name=="M11_Train_3"){
                         updateTrainSelection(trainSelectionPage: 3)
+                        
+                        MainNode.addChild(trains[2])
+                        trains[2].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+                        
+
                     }
                     if (node.name=="M11_Train_4"){
                         updateTrainSelection(trainSelectionPage: 4)
+                        
+                        MainNode.addChild(trains[3])
+                        trains[3].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+                        
+
                     }
                     if (node.name=="M11_Train_5"){
                         updateTrainSelection(trainSelectionPage: 5)
+                        
+                        MainNode.addChild(trains[4])
+                        trains[4].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+                        
+
                     }
                 }
                 

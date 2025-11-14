@@ -31,8 +31,8 @@ extension Background{
         if backgroundNum==2{
             backgroundNode=SKSpriteNode(imageNamed: "Beijing_M6_Background")
             backgroundNode.name="Beijing_M6_BackgroundNode"
-            backgroundNode.xScale=1
-            backgroundNode.yScale=1
+            backgroundNode.xScale=0.32
+            backgroundNode.yScale=0.32
             backgroundNode.position=CGPoint(x: 0, y: 0)
         }
         addChild(backgroundNode)
