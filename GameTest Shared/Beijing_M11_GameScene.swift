@@ -18,6 +18,9 @@ class Beijing_M11_GameScene: SKScene{
     
     private var serviceNum: [Int]=[1,1,1,1,1]
     
+    private var schedules: [[Schedule]]=[[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")]]
+    private var trainAdded: [Bool]=[false,false,false,false]
+    
 //    private var scheduleTimePage: Int=0
 //    private var scheduleDepartureStationPage: Int=0
     
@@ -33,8 +36,10 @@ class Beijing_M11_GameScene: SKScene{
     //private var scheduleSetupRowNumber: Int=1
     private var runGame: Bool=false
     private var startTime: TimeInterval=0
-    //private var pauseStartTime: TimeInterval=0
-    //private var totalTime: TimeInterval=0
+    private var pauseStartTime: TimeInterval=0
+    private var gamePauseTime: TimeInterval=0
+    private var totalGamePauseTime: TimeInterval=0
+    
     private var passengerFlow: Double=5000.0/43200.0
     private var timeDouble: Double=20.0
     private var pauseTime: TimeInterval=1.0
@@ -42,7 +47,10 @@ class Beijing_M11_GameScene: SKScene{
     
     private var stopTime: TimeInterval=1
     
-    private var passengers: [Passenger]=[]
+    //private var passengers: [Passenger]=[]
+    
+    private var stations: [Station]=[]
+    
     private var trains: [Train]=[]
     
     
@@ -56,6 +64,10 @@ class Beijing_M11_GameScene: SKScene{
     
     private var gameTime: TimeInterval=0{
         didSet{
+            checkSchedule()
+            
+            checkTrainLocation()
+            
             if gameTime>1296000.0{
                 winGame()
             }
@@ -82,8 +94,11 @@ class Beijing_M11_GameScene: SKScene{
             let currentWholeNumber = Int(totalPassenger)
             if currentWholeNumber > lastWholePassengerCount {
                 for _ in lastWholePassengerCount..<currentWholeNumber {
-                    let newPassenger=Passenger(code: generateRandomCode())
-                    passengers.append(newPassenger)
+                    let newPassenger=Passenger(code: "\(currentWholeNumber)")
+                    
+                    assignStation(newPassenger: newPassenger)
+                    //print("\(newPassenger.startStationNumber),\(newPassenger.endStationNumber)")
+                    //passengers.append(newPassenger)
                     
                     money+=(Double(newPassenger.getTicketPrice())+5.0)*(2.0+Double(scheduleTicketPricePage))
                     //print(passengersStartStation)
@@ -97,6 +112,10 @@ class Beijing_M11_GameScene: SKScene{
 
     
     override func didMove(to view: SKView) {
+        
+        self.speed=0.0
+        
+        pauseStartTime=Date.timeIntervalSinceReferenceDate
         startTime=Date().timeIntervalSinceReferenceDate
         
         timeLabel.position=CGPoint(x: 600, y: 260)
@@ -124,6 +143,11 @@ class Beijing_M11_GameScene: SKScene{
         
         setUpButton()
         setUpScheduleButton()
+        
+        stations.append(Station(stationName: "Moshikou", stationNumber: 1))
+        stations.append(Station(stationName: "Jin'anqiao", stationNumber: 2))
+        stations.append(Station(stationName: "Beixin'an", stationNumber: 3))
+        stations.append(Station(stationName: "Shougang_Park", stationNumber: 4))
         
         //startMovement()
     }
@@ -178,7 +202,7 @@ extension Beijing_M11_GameScene{
         for i in 1...4{
             MainNode.addChild(GameSceneButtons(buttonNum: i))
         }
-        MainNode.addChild(GameSceneButtons(buttonNum: 25))
+        MainNode.addChild(GameSceneButtons(buttonNum: 26))
         MainNode.addChild(GameSceneButtons(buttonNum: 27))
         addChild(MainNode)
     }
@@ -240,7 +264,7 @@ extension Beijing_M11_GameScene{
         }
         
         MainNode.addChild(trains[0])
-        trains[0].startMovement(scheduleStopTimePage: scheduleStopTimePage)
+        //trains[0].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
     }
     
     func updateTrainSelection(trainSelectionPage: Int){
@@ -290,7 +314,7 @@ extension Beijing_M11_GameScene{
             }
         }
         //scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8+timePage))
-        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 8+timePage, buttonRowCount: buttonRow, buttonPageNum: schedulePage))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 12+timePage, buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
     func updateDepartureSatation(departureStationPage: Int,buttonRow: Int){
@@ -314,7 +338,7 @@ extension Beijing_M11_GameScene{
                 node.removeFromParent()
             }
         }
-        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 11+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 8+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
         
         let nodesB=nodes(at: terminusStationIndicatorLoaction)
         for node in nodesB {
@@ -322,7 +346,7 @@ extension Beijing_M11_GameScene{
                 node.removeFromParent()
             }
         }
-        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 13+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
+        scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 10+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
     func updateTicketPrice(ticketPricePage: Int){
@@ -507,32 +531,40 @@ extension Beijing_M11_GameScene{
                     if (node.name=="M11_Train_2"){
                         updateTrainSelection(trainSelectionPage: 2)
                         
-                        MainNode.addChild(trains[1])
-                        trains[1].startMovement(scheduleStopTimePage: scheduleStopTimePage)
-                        
+                        if(!trainAdded[0]){
+                            MainNode.addChild(trains[1])
+                            //trains[1].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                            trainAdded[0]=true
+                        }
                     }
                     if (node.name=="M11_Train_3"){
                         updateTrainSelection(trainSelectionPage: 3)
                         
-                        MainNode.addChild(trains[2])
-                        trains[2].startMovement(scheduleStopTimePage: scheduleStopTimePage)
-                        
+                        if(!trainAdded[1]){
+                            MainNode.addChild(trains[2])
+                            //trains[2].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                            trainAdded[1]=true
+                        }
 
                     }
                     if (node.name=="M11_Train_4"){
                         updateTrainSelection(trainSelectionPage: 4)
                         
-                        MainNode.addChild(trains[3])
-                        trains[3].startMovement(scheduleStopTimePage: scheduleStopTimePage)
-                        
+                        if(!trainAdded[2]){
+                            MainNode.addChild(trains[3])
+                            //trains[3].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                            trainAdded[2]=true
+                        }
 
                     }
                     if (node.name=="M11_Train_5"){
                         updateTrainSelection(trainSelectionPage: 5)
                         
-                        MainNode.addChild(trains[4])
-                        trains[4].startMovement(scheduleStopTimePage: scheduleStopTimePage)
-                        
+                        if(!trainAdded[3]){
+                            MainNode.addChild(trains[4])
+                            //trains[4].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                            trainAdded[3]=true
+                        }
 
                     }
                 }
@@ -619,13 +651,20 @@ extension Beijing_M11_GameScene{
         for node in normalNodes {
             if node.name=="Pause_Button"{
                 MainNode.addChild(GameSceneButtons(buttonNum: 26))
-                //startTime=Date().timeIntervalSinceReferenceDate
-                runGame=true
+                pauseStartTime=Date().timeIntervalSinceReferenceDate
+                runGame=false
+                self.speed=0.0
                 node.removeFromParent()
             }
             if node.name=="Play_Button"{
                 MainNode.addChild(GameSceneButtons(buttonNum: 25))
-                runGame=false
+                totalGamePauseTime+=gamePauseTime
+                gamePauseTime=0
+                runGame=true
+                
+                updateSchedule()
+                
+                self.speed=1.0
                 node.removeFromParent()
             }
             if node.name=="Exit_Game_Scene_Button"{
@@ -637,37 +676,75 @@ extension Beijing_M11_GameScene{
     
     override func update(_ currentTime: TimeInterval) {
         let currentTime=Date().timeIntervalSinceReferenceDate
-        gameTime=(currentTime-startTime)*20
-        let interval=gameTime
-        //print(interval)
-        let formattedTime = String(format: "Time: %.1f", gameTime)
-        timeLabel.text = formattedTime
-        
-        if(interval>=timeDouble){
-            if(gameTime>7200){
-                //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
-                passengerFlow=passengerFlow*pow((24948101/24948100),timeDouble)
-                totalPassenger+=passengerFlow
+        if runGame==true{
+            gameTime=21000.0+(currentTime-startTime-totalGamePauseTime)*20
+            let interval=gameTime
+            //print(interval)
+            let formattedTime = String(format: "Time: %.1f", gameTime)
+            timeLabel.text = formattedTime
+            
+            if(interval>=timeDouble){
+                if(gameTime>7200){
+                    //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
+                    passengerFlow=passengerFlow*pow((24948101/24948100),timeDouble)
+                    totalPassenger+=passengerFlow
+                }
+                else{
+                    totalPassenger+=passengerFlow
+                }
+                
+                let moneyChange=20.0*((passengerFlow)*5*(2+Double(scheduleTicketPricePage))-(1000.0/3600.0*15.0*(1+Double(scheduleStopTimePage))+1900.0/3600.0*180.0)/(15.0*(1+Double(scheduleStopTimePage))+180.0)-3800.0/3600.0-1500.0*Double(trains.count)/3600.0)
+                
+                //print(passengerFlow)
+                //print(moneyChange)
+                
+                money+=moneyChange
+                
+                timeDouble+=20.0
             }
-            else{
-                totalPassenger+=passengerFlow
-            }
             
-            let moneyChange=20.0*((passengerFlow)*5*(2+Double(scheduleTicketPricePage))-(1000.0/3600.0*15.0*(1+Double(scheduleStopTimePage))+1900.0/3600.0*180.0)/(15.0*(1+Double(scheduleStopTimePage))+180.0)-3800.0/3600.0-1500.0*Double(trains.count)/3600.0)
+            let formattedPassenger = String(format: "%.0f", totalPassenger)
+            passengerLabel.text = formattedPassenger
             
-            //print(passengerFlow)
-            //print(moneyChange)
-            
-            money+=moneyChange
-            
-            timeDouble+=20.0
+            let formattedMoney = String(format: "%.1f", money)
+            moneyLabel.text = formattedMoney
+        }
+        else{
+            gamePauseTime=currentTime-pauseStartTime
         }
         
-        let formattedPassenger = String(format: "%.0f", totalPassenger)
-        passengerLabel.text = formattedPassenger
-        
-        let formattedMoney = String(format: "%.1f", money)
-        moneyLabel.text = formattedMoney
+//        let currentTime=Date().timeIntervalSinceReferenceDate
+//        gameTime=(currentTime-startTime)*20
+//        let interval=gameTime
+//        //print(interval)
+//        let formattedTime = String(format: "Time: %.1f", gameTime)
+//        timeLabel.text = formattedTime
+//        
+//        if(interval>=timeDouble){
+//            if(gameTime>7200){
+//                //passengerFlow=passengerFlow*pow((1201/1200), gameTime/86400)
+//                passengerFlow=passengerFlow*pow((24948101/24948100),timeDouble)
+//                totalPassenger+=passengerFlow
+//            }
+//            else{
+//                totalPassenger+=passengerFlow
+//            }
+//            
+//            let moneyChange=20.0*((passengerFlow)*5*(2+Double(scheduleTicketPricePage))-(1000.0/3600.0*15.0*(1+Double(scheduleStopTimePage))+1900.0/3600.0*180.0)/(15.0*(1+Double(scheduleStopTimePage))+180.0)-3800.0/3600.0-1500.0*Double(trains.count)/3600.0)
+//            
+//            //print(passengerFlow)
+//            //print(moneyChange)
+//            
+//            money+=moneyChange
+//            
+//            timeDouble+=20.0
+//        }
+//        
+//        let formattedPassenger = String(format: "%.0f", totalPassenger)
+//        passengerLabel.text = formattedPassenger
+//        
+//        let formattedMoney = String(format: "%.1f", money)
+//        moneyLabel.text = formattedMoney
         
     }
     
@@ -687,5 +764,137 @@ extension Beijing_M11_GameScene{
         }
         
         return randomString
+    }
+    
+    func updateSchedule(){
+        for i in 0...4{
+            if scheduleTimePage[i].count>schedules[i].count{
+                for j in schedules[i].count...scheduleTimePage.count-1{
+                    if scheduleDepartureStationPage[i][j]==1{
+                        schedules[i].append(Schedule(startTime: Double(scheduleTimePage[i][j]*21600), startStationName: "Moshikou", endStationName: "Shougang_Park"))
+                    }
+                    else{
+                        schedules[i].append(Schedule(startTime: Double(scheduleTimePage[i][j]*21600), startStationName: "Shougang_Park", endStationName: "Moshikou"))
+                    }
+                }
+            }
+            for j in 0...scheduleTimePage[i].count-1{
+                schedules[i][j].startTime=Double(scheduleTimePage[i][j]*21600)
+                if scheduleDepartureStationPage[i][j]==1{
+                    schedules[i][j].startStationName="Moshikou"
+                    schedules[i][j].endStationName="Shougang_Park"
+                }
+                else{
+                    schedules[i][j].startStationName="Shougang_Park"
+                    schedules[i][j].endStationName="Moshikou"
+                }
+            }
+        }
+    }
+    
+    func checkSchedule(){
+        for i in 0...trains.count-1{
+            for j in 0...schedules[i].count-1{
+                if((gameTime>=schedules[i][j].startTime)&&(schedules[i][j].startTime != 0.0)){
+                    if(trains[i].locationName==schedules[i][j].startStationName){
+                        schedules[i][j].startTime+=86400.0
+//                        if(trains[i].parent==nil){
+//                            trains[i]
+//                        }
+                        if(trains[i].locationName=="Shougang_Park"){
+                            trains[i].startStation="Shougang_Park"
+                            trains[i].endStation="Moshikou"
+                            trains[i].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                        }
+                        else if(trains[i].locationName=="Moshikou"){
+                            trains[i].startStation="Moshikou"
+                            trains[i].endStation="Shougang_Park"
+                            trains[i].startMovementS(scheduleStopTimePage: scheduleStopTimePage)
+                        }
+                    }
+                    else{
+                        print("Train Location Error")
+                    }
+                }
+            }
+        }
+    }
+    
+    func assignStation(newPassenger: Passenger){
+        if(newPassenger.startStationNumber==1){
+            stations[0].southBoundPassengers.append(newPassenger)
+        }
+        else if(newPassenger.startStationNumber==2){
+            if(newPassenger.endStationNumber<2){
+                stations[1].northBoundPassengers.append(newPassenger)
+            }
+            else{
+                stations[1].southBoundPassengers.append(newPassenger)
+            }
+        }
+        else if(newPassenger.startStationNumber==3){
+            if(newPassenger.endStationNumber<3){
+                stations[2].northBoundPassengers.append(newPassenger)
+            }
+            else{
+                stations[2].southBoundPassengers.append(newPassenger)
+            }
+        }
+        else{
+            stations[3].northBoundPassengers.append(newPassenger)
+        }
+    }
+    
+    func checkTrainLocation(){
+        for i in 0...4{
+            for j in 0...3{
+                if(trains[i].locationName==stations[j].stationName){
+                    disembarkPassengers(train: trains[i], station: stations[j])
+                    boardPassengers(train: trains[i], station: stations[j])
+                }
+            }
+        }
+    }
+    
+    func disembarkPassengers(train: Train, station: Station){
+        var passengersDisembarked=0
+        if(train.passengersInTrain.count>0){
+            for i in 0...train.passengersInTrain.count-1{
+                if(train.passengersInTrain[i-passengersDisembarked].endStationNumber==station.stationNumber){
+                    train.passengersInTrain.remove(at: i-passengersDisembarked)
+                    passengersDisembarked+=1
+                }
+                else{
+                    print("\(train.passengersInTrain[i-passengersDisembarked].startStationNumber),\(train.passengersInTrain[i-passengersDisembarked].endStationNumber)")
+                }
+            }
+        }
+    }
+    
+    func boardPassengers(train: Train, station: Station){
+        var passengersBoarded=0
+        var emptySeats=train.capacity-train.passengersInTrain.count
+        if(emptySeats>0){
+            if(train.endStation=="Moshikou"){
+                if(station.northBoundPassengers.count>0){
+                    for i in 0...station.northBoundPassengers.count-1{
+                        let targetPassenger=station.northBoundPassengers.remove(at: i-passengersBoarded)
+                        train.passengersInTrain.append(targetPassenger)
+                        //print("\(targetPassenger.startStationNumber),\(targetPassenger.endStationNumber)")
+                        passengersBoarded+=1
+                    }
+                }
+            }
+            if(train.endStation=="Shougang_Park"){
+                if(station.southBoundPassengers.count>0){
+                    for i in 0...station.southBoundPassengers.count-1{
+                        let targetPassenger=station.southBoundPassengers.remove(at: i-passengersBoarded)
+                        train.passengersInTrain.append(targetPassenger)
+                        //print("\(targetPassenger.startStationNumber),\(targetPassenger.endStationNumber)")
+                        passengersBoarded+=1
+                    }
+                }
+            }
+        }
     }
 }

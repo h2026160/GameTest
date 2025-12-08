@@ -461,53 +461,242 @@ extension GameSceneButtons{
             gameSceneButtonNode.position=CGPoint(x: -20, y: 250-110*buttonRow)
         }
         if(buttonIndex==9){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(1)")
-            gameSceneButtonNode.name="First_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Moshikou")
+            gameSceneButtonNode.name="Moshikou_Station\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -160, y: 250-110*buttonRow)
         }
         if(buttonIndex==10){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(2)")
-            gameSceneButtonNode.name="Second_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Shougang_Park")
+            gameSceneButtonNode.name="Shougang_Park_Station\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -160, y: 250-110*buttonRow)
         }
         if(buttonIndex==11){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(3)")
-            gameSceneButtonNode.name="Third_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Shougang_Park")
+            gameSceneButtonNode.name="Shougang_Park_Station\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -20, y: 250-110*buttonRow)
         }
         if(buttonIndex==12){
             gameSceneButtonNode=SKSpriteNode(imageNamed: "Moshikou")
             gameSceneButtonNode.name="Moshikou_Station\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -160, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -20, y: 250-110*buttonRow)
         }
         if(buttonIndex==13){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Shougang_Park")
-            gameSceneButtonNode.name="Shougang_Park_Station\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(1)")
+            gameSceneButtonNode.name="1st_Time\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -160, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
         }
         if(buttonIndex==14){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Shougang_Park")
-            gameSceneButtonNode.name="Shougang_Park_Station\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(2)")
+            gameSceneButtonNode.name="2nd_Time\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -20, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
         }
         if(buttonIndex==15){
-            gameSceneButtonNode=SKSpriteNode(imageNamed: "Moshikou")
-            gameSceneButtonNode.name="Moshikou_Station\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(3)")
+            gameSceneButtonNode.name="3rd_Time\(buttonRow)-\(buttonPage)"
             gameSceneButtonNode.xScale=0.06
             gameSceneButtonNode.yScale=0.06
-            gameSceneButtonNode.position=CGPoint(x: -20, y: 250-110*buttonRow)
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==16){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(4)")
+            gameSceneButtonNode.name="4th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==17){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(5)")
+            gameSceneButtonNode.name="5th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==18){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(6)")
+            gameSceneButtonNode.name="6th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==19){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(7)")
+            gameSceneButtonNode.name="7th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==20){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(8)")
+            gameSceneButtonNode.name="8th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==21){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(9)")
+            gameSceneButtonNode.name="9th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==22){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(10)")
+            gameSceneButtonNode.name="10th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==23){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(11)")
+            gameSceneButtonNode.name="11th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==24){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(12)")
+            gameSceneButtonNode.name="12th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==25){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(13)")
+            gameSceneButtonNode.name="13th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==26){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(14)")
+            gameSceneButtonNode.name="14th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==27){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(15)")
+            gameSceneButtonNode.name="15th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==28){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(16)")
+            gameSceneButtonNode.name="16th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==29){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(17)")
+            gameSceneButtonNode.name="17th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==30){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(18)")
+            gameSceneButtonNode.name="18th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==31){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(19)")
+            gameSceneButtonNode.name="19th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==32){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(20)")
+            gameSceneButtonNode.name="20th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==33){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(21)")
+            gameSceneButtonNode.name="21st_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==34){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(22)")
+            gameSceneButtonNode.name="22nd_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==35){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(23)")
+            gameSceneButtonNode.name="23rd_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==36){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(24)")
+            gameSceneButtonNode.name="24th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==37){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(25)")
+            gameSceneButtonNode.name="25th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==38){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(26)")
+            gameSceneButtonNode.name="26th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==39){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(27)")
+            gameSceneButtonNode.name="27th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==40){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(28)")
+            gameSceneButtonNode.name="28th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==41){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(29)")
+            gameSceneButtonNode.name="29th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
+        }
+        if(buttonIndex==42){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "Time(30)")
+            gameSceneButtonNode.name="30th_Time\(buttonRow)-\(buttonPage)"
+            gameSceneButtonNode.xScale=0.06
+            gameSceneButtonNode.yScale=0.06
+            gameSceneButtonNode.position=CGPoint(x: -300, y: 250-110*buttonRow)
         }
         addChild(gameSceneButtonNode)
     }

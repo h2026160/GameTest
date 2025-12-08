@@ -12,9 +12,9 @@ class Passenger{
     private var passengerDistribution: [Int]=[0,20,110,170,200]
     
     private var startStationCode: Int
-    private var startStationNumber: Int=0
+    var startStationNumber: Int=0
     private var endStationCode: Int
-    private var endStationNumber: Int=0
+    var endStationNumber: Int=0
     private var code: String
     
     init(code: String) {
