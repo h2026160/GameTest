@@ -17,6 +17,8 @@ class Passenger{
     var endStationNumber: Int=0
     private var code: String
     
+    var stationNumberDifference: Int
+    
     init(code: String) {
         self.startStationCode = Int.random(in: 1...200)
             //represents 1/200 or 0.5%
@@ -50,20 +52,18 @@ class Passenger{
         }
         
         self.code = code
-    }
-    
-    func getStartStation() -> Int{
-        return self.startStationCode
+        
+        self.stationNumberDifference=abs(endStationNumber-startStationNumber)
     }
     
     func getTicketPrice() -> Int{
         var basePrice=1
         //print(abs(self.startStationNumber-self.endStationNumber))
-        if(abs(self.startStationNumber-self.endStationNumber)<=6){
-            return 1
+        if(stationNumberDifference<=6){
+            return basePrice
         }
         else{
-            return 1
+            return basePrice
         }
     }
 }

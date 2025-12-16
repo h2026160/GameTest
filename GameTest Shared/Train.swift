@@ -18,7 +18,7 @@ class Train: SKNode{
     private var trainNode: SKSpriteNode!
     
     private var locationIndex: Int=1
-    var locationName: String="Shougang_Park"
+    var locationName: String="Shougang_Park_Depot"
     
     var capacity: Int=1800
     var passengersInTrain: [Passenger]=[]
@@ -26,6 +26,8 @@ class Train: SKNode{
     init(code: String) {
         self.code = code
         super.init()
+        
+        self.zPosition = -3.0
         
         setTrain()
     }
@@ -115,7 +117,7 @@ extension Train{
         let MR32=SKAction.moveBy(x: 20, y: 55, duration: 9*20/275)
         let MR33=SKAction.moveBy(x: 80, y: 0, duration: 9*80/275)
         
-        let loop=SKAction.sequence([MR11,MR12,MR13,ST,updateLocation,MR2,ST,updateLocation,MR31,MR32,MR33,ST,updateLocation])
+        let loop=SKAction.sequence([ST,MR11,MR12,MR13,ST,updateLocation,MR2,ST,updateLocation,MR31,MR32,MR33,ST,updateLocation])
         trainNode.run(loop)
     }
     
@@ -142,4 +144,11 @@ extension Train{
 //    func call(){
 //        print(self.endStation)
 //    }
+    
+    func enterService(){
+        if(locationName=="Shougang_Park_Depot"){
+            locationName="Shougang_Park"
+            zPosition=8.0
+        }
+    }
 }

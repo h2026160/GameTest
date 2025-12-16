@@ -309,7 +309,7 @@ extension Beijing_M11_GameScene{
         
         let nodes=nodes(at: timeIndicatorLoaction)
         for node in nodes {
-            if (node.name=="Initial_Time\(buttonRow)-\(schedulePage)")||(node.name=="Time(1)\(buttonRow)-\(schedulePage)")||(node.name=="Time(2)\(buttonRow)-\(schedulePage)")||(node.name=="Time(3)\(buttonRow)-\(schedulePage)"){
+            if (node.name=="Initial_Time\(buttonRow)-\(schedulePage)")||(node.name=="Time(1)\(buttonRow)-\(schedulePage)")||(node.name=="Time(2)\(buttonRow)-\(schedulePage)")||(node.name=="Time(3)\(buttonRow)-\(schedulePage)")||(node.name=="Time(4)\(buttonRow)-\(schedulePage)")||(node.name=="Time(5)\(buttonRow)-\(schedulePage)")||(node.name=="Time(6)\(buttonRow)-\(schedulePage)")||(node.name=="Time(7)\(buttonRow)-\(schedulePage)")||(node.name=="Time(8)\(buttonRow)-\(schedulePage)")||(node.name=="Time(9)\(buttonRow)-\(schedulePage)")||(node.name=="Time(10)\(buttonRow)-\(schedulePage)")||(node.name=="Time(11)\(buttonRow)-\(schedulePage)")||(node.name=="Time(12)\(buttonRow)-\(schedulePage)")||(node.name=="Time(13)\(buttonRow)-\(schedulePage)")||(node.name=="Time(14)\(buttonRow)-\(schedulePage)")||(node.name=="Time(15)\(buttonRow)-\(schedulePage)")||(node.name=="Time(16)\(buttonRow)-\(schedulePage)")||(node.name=="Time(17)\(buttonRow)-\(schedulePage)")||(node.name=="Time(18)\(buttonRow)-\(schedulePage)")||(node.name=="Time(19)\(buttonRow)-\(schedulePage)")||(node.name=="Time(20)\(buttonRow)-\(schedulePage)")||(node.name=="Time(21)\(buttonRow)-\(schedulePage)")||(node.name=="Time(22)\(buttonRow)-\(schedulePage)")||(node.name=="Time(23)\(buttonRow)-\(schedulePage)")||(node.name=="Time(24)\(buttonRow)-\(schedulePage)")||(node.name=="Time(25)\(buttonRow)-\(schedulePage)")||(node.name=="Time(26)\(buttonRow)-\(schedulePage)")||(node.name=="Time(27)\(buttonRow)-\(schedulePage)")||(node.name=="Time(28)\(buttonRow)-\(schedulePage)")||(node.name=="Time(29)\(buttonRow)-\(schedulePage)")||(node.name=="Time(30)\(buttonRow)-\(schedulePage)")||(node.name=="Time(31)\(buttonRow)-\(schedulePage)")||(node.name=="Time(32)\(buttonRow)-\(schedulePage)")||(node.name=="Time(33)\(buttonRow)-\(schedulePage)")||(node.name=="Time(34)\(buttonRow)-\(schedulePage)")||(node.name=="Time(35)\(buttonRow)-\(schedulePage)")||(node.name=="Time(36)\(buttonRow)-\(schedulePage)")||(node.name=="Time(37)\(buttonRow)-\(schedulePage)")||(node.name=="Time(38)\(buttonRow)-\(schedulePage)")||(node.name=="Time(39)\(buttonRow)-\(schedulePage)")||(node.name=="Time(40)\(buttonRow)-\(schedulePage)")||(node.name=="Time(41)\(buttonRow)-\(schedulePage)")||(node.name=="Time(42)\(buttonRow)-\(schedulePage)")||(node.name=="Time(43)\(buttonRow)-\(schedulePage)")||(node.name=="Time(44)\(buttonRow)-\(schedulePage)")||(node.name=="Time(45)\(buttonRow)-\(schedulePage)")||(node.name=="Time(46)\(buttonRow)-\(schedulePage)")||(node.name=="Time(47)\(buttonRow)-\(schedulePage)")||(node.name=="Time(48)\(buttonRow)-\(schedulePage)")||(node.name=="Time(49)\(buttonRow)-\(schedulePage)"){
                 node.removeFromParent()
             }
         }
@@ -469,7 +469,7 @@ extension Beijing_M11_GameScene{
                 for node in nodesA{
                     for j in 1...5 {
                         for i in 1...serviceNum[schedulePage-1]{
-                            if (node.name=="Next_Time_Button\(i)-\(j)")&&(scheduleTimePage[j-1][i-1]<3){
+                            if (node.name=="Next_Time_Button\(i)-\(j)")&&(scheduleTimePage[j-1][i-1]<49){
                                 scheduleTimePage[j-1][i-1]+=1
                                 updateTime(timePage: scheduleTimePage[j-1][i-1],buttonRow: i)
                             }
@@ -769,17 +769,17 @@ extension Beijing_M11_GameScene{
     func updateSchedule(){
         for i in 0...4{
             if scheduleTimePage[i].count>schedules[i].count{
-                for j in schedules[i].count...scheduleTimePage.count-1{
+                for j in schedules[i].count...scheduleTimePage[i].count-1{
                     if scheduleDepartureStationPage[i][j]==1{
-                        schedules[i].append(Schedule(startTime: Double(scheduleTimePage[i][j]*21600), startStationName: "Moshikou", endStationName: "Shougang_Park"))
+                        schedules[i].append(Schedule(startTime: Double(20700+scheduleTimePage[i][j]*900), startStationName: "Moshikou", endStationName: "Shougang_Park"))
                     }
                     else{
-                        schedules[i].append(Schedule(startTime: Double(scheduleTimePage[i][j]*21600), startStationName: "Shougang_Park", endStationName: "Moshikou"))
+                        schedules[i].append(Schedule(startTime: Double(20700+scheduleTimePage[i][j]*900), startStationName: "Shougang_Park", endStationName: "Moshikou"))
                     }
                 }
             }
             for j in 0...scheduleTimePage[i].count-1{
-                schedules[i][j].startTime=Double(scheduleTimePage[i][j]*21600)
+                schedules[i][j].startTime=Double(20700+scheduleTimePage[i][j]*900)
                 if scheduleDepartureStationPage[i][j]==1{
                     schedules[i][j].startStationName="Moshikou"
                     schedules[i][j].endStationName="Shougang_Park"
@@ -796,6 +796,7 @@ extension Beijing_M11_GameScene{
         for i in 0...trains.count-1{
             for j in 0...schedules[i].count-1{
                 if((gameTime>=schedules[i][j].startTime)&&(schedules[i][j].startTime != 0.0)){
+                    trains[i].enterService()
                     if(trains[i].locationName==schedules[i][j].startStationName){
                         schedules[i][j].startTime+=86400.0
 //                        if(trains[i].parent==nil){
@@ -861,12 +862,12 @@ extension Beijing_M11_GameScene{
         if(train.passengersInTrain.count>0){
             for i in 0...train.passengersInTrain.count-1{
                 if(train.passengersInTrain[i-passengersDisembarked].endStationNumber==station.stationNumber){
-                    train.passengersInTrain.remove(at: i-passengersDisembarked)
+                    money+=Double(train.passengersInTrain.remove(at: i-passengersDisembarked).getTicketPrice())
                     passengersDisembarked+=1
                 }
-                else{
-                    print("\(train.passengersInTrain[i-passengersDisembarked].startStationNumber),\(train.passengersInTrain[i-passengersDisembarked].endStationNumber)")
-                }
+//                else{
+//                    print("\(train.passengersInTrain[i-passengersDisembarked].startStationNumber),\(train.passengersInTrain[i-passengersDisembarked].endStationNumber)")
+//                }
             }
         }
     }
