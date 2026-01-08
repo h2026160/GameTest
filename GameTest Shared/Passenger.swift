@@ -56,7 +56,7 @@ class Passenger{
         self.stationNumberDifference=abs(endStationNumber-startStationNumber)
     }
     
-    func getTicketPrice() -> Int{
+    func getTicketPrice() -> Int{   // returns the ticket price
         var basePrice=1
         //print(abs(self.startStationNumber-self.endStationNumber))
         if(stationNumberDifference<=6){

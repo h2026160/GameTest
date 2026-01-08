@@ -20,19 +20,35 @@ class Beijing_M6_GameScene: SKScene{
     private var MainNode=SKNode()
     private var hasScheduleButton: Bool=true
     private var scheduleButtonBackground: SKNode=GameSceneButtons(buttonNum: 5)
+    
+    private var scheduleButtonPages: [SKNode]=[SKNode(),SKNode(),SKNode(),SKNode(),SKNode()]
+    private var schedulePage: Int=1
+    private var serviceNum: [Int]=[1,1,1,1,1]
+    private var schedules: [[Schedule]]=[[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")],[Schedule(startTime: 0.0, startStationName: "", endStationName: "")]]
+    private var trainAdded: [Bool]=[false,false,false,false]
+    
     private var scheduleTimePage: Int=0
     private var scheduleDepartureStationPage: Int=0
     private var scheduleTicketPricePage: Int=0
-    private var scheduleStopTimePage: Int=0
+    private var scheduleStopTimePage: Int=0{
+        didSet{
+            stopTimeChanged=true
+        }
+    }
     
     private var runGame: Bool=false
     private var startTime: TimeInterval=0
+    private var pauseStartTime: TimeInterval=0
+    private var gamePauseTime: TimeInterval=0
+    private var totalGamePauseTime: TimeInterval=0
     private var passengerFlow: Double=11300.0
     private var timeDouble: Double=1.0
     private var pauseTime: TimeInterval=1.0
     private var stopTimeChanged: Bool=false
     
     private var stopTime: TimeInterval=1
+    private var stations: [Station]=[]
+    private var trains: [Train]=[]
     
     let timeLabel=SKLabelNode(text: "Time:0")
     let passengerLabel=SKLabelNode(text: "0")
@@ -121,7 +137,7 @@ class Beijing_M6_GameScene: SKScene{
 
 extension Beijing_M6_GameScene{
     
-    func startMovement(){
+    func startMovement(){   // starts the train's movement in scene
         print("called")
         let ST=SKAction.wait(forDuration: 0.5)
         let ML011=SKAction.moveBy(x: -38, y: 0, duration: 9*38/57.94)
@@ -187,17 +203,17 @@ extension Beijing_M6_GameScene{
         trainNode.run(loop)
     }
     
-    func setUpBackground(){
+    func setUpBackground(){   // sets up the background
         MainNode.addChild(Background(backgroundNum: 2))
     }
-    func setUpButton(){
+    func setUpButton(){   // sets up the scene
         for i in 1...4{
             MainNode.addChild(GameSceneButtons(buttonNum: i))
         }
         MainNode.addChild(GameSceneButtons(buttonNum: 25))
         MainNode.addChild(GameSceneButtons(buttonNum: 27))
     }
-    func setUpScheduleButton(){
+    func setUpScheduleButton(){   // sets up the buttons in the schedule page
         for i in 6...8{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
@@ -217,7 +233,7 @@ extension Beijing_M6_GameScene{
             scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
         }
     }
-    func updateTime(timePage: Int){
+    func updateTime(timePage: Int){   // updates the player's choice for train's departure and arrival time in schedule page
         let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
         
         let nodes=nodes(at: timeIndicatorLoaction)
@@ -228,7 +244,7 @@ extension Beijing_M6_GameScene{
         }
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 8+timePage))
     }
-    func updateDepartureSatation(departureStationPage: Int){
+    func updateDepartureSatation(departureStationPage: Int){   // updates the player's choice of departure station
         let departureStationIndicatorLoaction=CGPoint(x: -160, y: 140)
         let terminusStationIndicatorLoaction=CGPoint(x: -20, y: 140)
         
@@ -249,7 +265,7 @@ extension Beijing_M6_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 20+departureStationPage))
     }
     
-    func updateTicketPrice(ticketPricePage: Int){
+    func updateTicketPrice(ticketPricePage: Int){   // updates the player's choice of ticket price
         let ticketPriceIndicatorLoaction=CGPoint(x: 120, y: 140)
         
         let nodesC=nodes(at: ticketPriceIndicatorLoaction)
@@ -261,7 +277,7 @@ extension Beijing_M6_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 29+ticketPricePage))
     }
     
-    func updateStopTime(stopTimePage: Int){
+    func updateStopTime(stopTimePage: Int){   // updates the player's choice of stop time of the train
         let stopTimeIndicatorLocation=CGPoint(x: 260, y: 140)
         
         let nodesD=nodes(at: stopTimeIndicatorLocation)
@@ -273,7 +289,7 @@ extension Beijing_M6_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 38+stopTimePage))
     }
     
-    func clearButtons(){
+    func clearButtons(){   // removes all buttons
         let previousTimeButtonPosition=CGPoint(x: -322, y: 85)
         let nextTimeButtonPosition=CGPoint(x: -278, y: 85)
         let previousStationButtonPosition=CGPoint(x: -182, y: 85)
@@ -339,7 +355,7 @@ extension Beijing_M6_GameScene{
             }
         }
     }
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ currentTime: TimeInterval) {   // updates values related with time
         
         let currentTime=Date().timeIntervalSinceReferenceDate
         gameTime=(currentTime-startTime)*20
@@ -382,7 +398,7 @@ extension Beijing_M6_GameScene{
         sceneCamera.xScale += (targetScale - sceneCamera.xScale) * easing
         sceneCamera.yScale += (targetScale - sceneCamera.yScale) * easing
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // touch and button interactions
         if touches.count == 2 {
             let touchArray = Array(touches)
             let touch1 = touchArray[0].location(in: self)
@@ -476,7 +492,7 @@ extension Beijing_M6_GameScene{
             }
         }
     }
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {   // touch movement interactions
         if touches.count == 1, let touch = touches.first, let lastTouch = lastTouchLocation {
             if sceneCamera.xScale < 1.0 {
                 let locationInScene = touch.location(in: self)
@@ -502,12 +518,12 @@ extension Beijing_M6_GameScene{
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {   // resets some variables when touch ends
         lastTouchLocation = nil
         lastPinchDistance = nil
     }
         
-    func distance(from point1: CGPoint, to point2: CGPoint) -> CGFloat {
+    func distance(from point1: CGPoint, to point2: CGPoint) -> CGFloat {   // calculates distance
         let dx = point2.x - point1.x
         let dy = point2.y - point1.y
         return sqrt(dx*dx + dy*dy)

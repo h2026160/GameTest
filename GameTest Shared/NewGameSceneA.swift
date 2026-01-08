@@ -25,7 +25,7 @@ class NewGameSceneA: SKScene {
 
 extension NewGameSceneA {
     
-    func setUpButton(pageNumber:Int){
+    func setUpButton(pageNumber:Int){   // sets up the scene
         for i in 10...11{
             MainNode.addChild(Button(buttonNum:i))
         }
@@ -52,7 +52,7 @@ extension NewGameSceneA {
         addChild(MainNode)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interactions
         let location=touches.first?.location(in: self)
         
         let nodes=nodes(at: location!)

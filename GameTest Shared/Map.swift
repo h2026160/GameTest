@@ -32,7 +32,7 @@ class Map: SKNode{
 }
 
 extension Map{
-    func setUpMapA(mapIndex: Int){
+    func setUpMapA(mapIndex: Int){   // sets up the button for the map
         if(mapIndex==1){
             mapNode=SKSpriteNode(imageNamed: "Beijing_M11")
             mapNode.name="Beijing_M11_Button"
@@ -64,7 +64,7 @@ extension Map{
         addChild(mapNode)
     }
     
-    func setUpDCMap(mapIndex: Int){
+    func setUpDCMap(mapIndex: Int){   // sets up the button for the map
         if(mapIndex==101){
             mapNode=SKSpriteNode(imageNamed: "Beijing_M11")
             mapNode.name="Beijing_M11_Button"

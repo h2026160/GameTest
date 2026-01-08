@@ -27,7 +27,7 @@ class Background: SKNode{
 }
 
 extension Background{
-    func setGameSceneBackground(){
+    func setGameSceneBackground(){   // sets up the background for game scene
         if backgroundNum==2{
             backgroundNode=SKSpriteNode(imageNamed: "Beijing_M6_Background")
             backgroundNode.name="Beijing_M6_BackgroundNode"

@@ -187,18 +187,18 @@ class Beijing_M11_GameScene: SKScene{
 //        }
 //    }
     
-    func winGame(){
+    func winGame(){   // runs after game is won
         let newScene=SKScene(fileNamed: "MenuScene")
         self.view?.presentScene(newScene)
     }
     
-    func loseGame(){
+    func loseGame(){   // runs after game is lost
         let newScene=SKScene(fileNamed: "MenuScene")
         self.view?.presentScene(newScene)
     }
 }
 extension Beijing_M11_GameScene{
-    func setUpButton(){
+    func setUpButton(){   // sets up the scene
         for i in 1...4{
             MainNode.addChild(GameSceneButtons(buttonNum: i))
         }
@@ -207,7 +207,7 @@ extension Beijing_M11_GameScene{
         addChild(MainNode)
     }
     
-    func setUpScheduleButton(){
+    func setUpScheduleButton(){   // sets up the buttons in the schedule page
 //        for i in 6...8{
 //            scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: i))
 //        }
@@ -258,7 +258,7 @@ extension Beijing_M11_GameScene{
 
     }
     
-    func setUpTrains(){
+    func setUpTrains(){   // sets up the trains
         for i in 11001...11005{
             trains.append(Train(code: "\(i)"))
         }
@@ -267,7 +267,7 @@ extension Beijing_M11_GameScene{
         //trains[0].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
     }
     
-    func updateTrainSelection(trainSelectionPage: Int){
+    func updateTrainSelection(trainSelectionPage: Int){   // updates the player's current choosen train in schedule page
         let oldTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*schedulePage)
         let newTrainIndicatorLocation=CGPoint(x: 400, y: 230-50*trainSelectionPage)
         
@@ -290,7 +290,7 @@ extension Beijing_M11_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 46+trainSelectionPage))
     }
     
-    func updateAddButton(trainNumber: Int){
+    func updateAddButton(trainNumber: Int){   // updates the position of the add buttons
         let addIndicatorLocation=CGPoint(x: -380, y: 140-110*serviceNum[schedulePage-1])
         
         let nodes=nodes(at: addIndicatorLocation)
@@ -301,7 +301,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func updateTime(timePage: Int,buttonRow: Int){
+    func updateTime(timePage: Int,buttonRow: Int){   // updates the player's choice for train's departure and arrival time in schedule page
         
         //trains[buttonRow-1].changeDepartureTime(timePoint: 6*timePage)
         
@@ -317,7 +317,7 @@ extension Beijing_M11_GameScene{
         scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 12+timePage, buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
-    func updateDepartureSatation(departureStationPage: Int,buttonRow: Int){
+    func updateDepartureStation(departureStationPage: Int,buttonRow: Int){   // updates the player's choice of departure station
         
 //        if departureStationPage==1{
 //            trains[buttonRow-1].changeStartStation(stationName: "Moshikou")
@@ -349,7 +349,7 @@ extension Beijing_M11_GameScene{
         scheduleButtonPages[schedulePage-1].addChild(GameSceneButtons(buttonNum: 10+departureStationPage,buttonRowCount: buttonRow, buttonPageNum: schedulePage))
     }
     
-    func updateTicketPrice(ticketPricePage: Int){
+    func updateTicketPrice(ticketPricePage: Int){   // updates the player's choice of ticket price
         let ticketPriceIndicatorLoaction=CGPoint(x: 120, y: 140)
         
         let nodesC=nodes(at: ticketPriceIndicatorLoaction)
@@ -361,7 +361,7 @@ extension Beijing_M11_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 29+ticketPricePage))
     }
     
-    func updateStopTime(stopTimePage: Int){
+    func updateStopTime(stopTimePage: Int){   // updates the player's choice of stop time of the train
         let stopTimeIndicatorLocation=CGPoint(x: 260, y: 140)
         
         let nodesD=nodes(at: stopTimeIndicatorLocation)
@@ -373,7 +373,7 @@ extension Beijing_M11_GameScene{
         scheduleButtonBackground.addChild(GameSceneButtons(buttonNum: 38+stopTimePage))
     }
     
-    func clearButtons(){
+    func clearButtons(){   // removes buttons from scene
         let previousTimeButtonPosition=CGPoint(x: -322, y: 85)
         let nextTimeButtonPosition=CGPoint(x: -278, y: 85)
         let previousStationButtonPosition=CGPoint(x: -182, y: 85)
@@ -440,7 +440,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interactions
         let location=touches.first?.location(in: self)
 //        let backgroundLoaction=CGPoint(x: 0, y: 0)
 //        let timeIndicatorLoaction=CGPoint(x: -300, y: 140)
@@ -483,13 +483,13 @@ extension Beijing_M11_GameScene{
                         for i in 1...serviceNum[schedulePage-1]{
                             if (node.name=="Next_Departure_Station_Button\(i)-\(j)")&&(scheduleDepartureStationPage[j-1][i-1]<2){
                                 scheduleDepartureStationPage[j-1][i-1]+=1
-                                updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
+                                updateDepartureStation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
                             }
                         }
                         for i in 1...serviceNum[schedulePage-1]{
                             if (node.name=="Previous_Departure_Station_Button\(i)-\(j)")&&(scheduleDepartureStationPage[j-1][i-1]>1){
                                 scheduleDepartureStationPage[j-1][i-1]-=1
-                                updateDepartureSatation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
+                                updateDepartureStation(departureStationPage: scheduleDepartureStationPage[j-1][i-1],buttonRow: i)
                             }
                         }
                         if node.name=="Add_Button-\(j)"{
@@ -674,7 +674,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
+    override func update(_ currentTime: TimeInterval) {   // updates values related with time
         let currentTime=Date().timeIntervalSinceReferenceDate
         if runGame==true{
             gameTime=21000.0+(currentTime-startTime-totalGamePauseTime)*20
@@ -748,14 +748,9 @@ extension Beijing_M11_GameScene{
         
     }
     
-    func generateRandomCode() -> String {
-        // Define the set of all characters to use
+    func generateRandomCode() -> String {   // generates a random string
         let characters = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};:'\"\\|,.<>/?`~"
-        
-        // Define the desired length of the name
-        let nameLength = Int.random(in: 10...20) // Random length between 10 and 20
-        
-        // Build the string by picking a random character for each position
+        let nameLength = Int.random(in: 10...20)
         var randomString = ""
         for _ in 0..<nameLength {
             if let randomCharacter = characters.randomElement() {
@@ -766,7 +761,7 @@ extension Beijing_M11_GameScene{
         return randomString
     }
     
-    func updateSchedule(){
+    func updateSchedule(){   // updates the changes in the button selections into the schedule
         for i in 0...4{
             if scheduleTimePage[i].count>schedules[i].count{
                 for j in schedules[i].count...scheduleTimePage[i].count-1{
@@ -792,7 +787,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func checkSchedule(){
+    func checkSchedule(){   // check if the time reached the departure time in the schedule
         for i in 0...trains.count-1{
             for j in 0...schedules[i].count-1{
                 if((gameTime>=schedules[i][j].startTime)&&(schedules[i][j].startTime != 0.0)){
@@ -821,7 +816,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func assignStation(newPassenger: Passenger){
+    func assignStation(newPassenger: Passenger){   // assigns each passenger object into station arrays
         if(newPassenger.startStationNumber==1){
             stations[0].southBoundPassengers.append(newPassenger)
         }
@@ -846,7 +841,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func checkTrainLocation(){
+    func checkTrainLocation(){   // checks if the train is at the right departure station
         for i in 0...4{
             for j in 0...3{
                 if(trains[i].locationName==stations[j].stationName){
@@ -857,7 +852,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func disembarkPassengers(train: Train, station: Station){
+    func disembarkPassengers(train: Train, station: Station){   // removes passengers that have reached their destination from the train array
         var passengersDisembarked=0
         if(train.passengersInTrain.count>0){
             for i in 0...train.passengersInTrain.count-1{
@@ -872,7 +867,7 @@ extension Beijing_M11_GameScene{
         }
     }
     
-    func boardPassengers(train: Train, station: Station){
+    func boardPassengers(train: Train, station: Station){   // move some passengers from the station array into the train array 
         var passengersBoarded=0
         var emptySeats=train.capacity-train.passengersInTrain.count
         if(emptySeats>0){

@@ -20,7 +20,7 @@ class MenuScene: SKScene {
 
 extension MenuScene{
     
-    func setUpButton(){
+    func setUpButton(){   // sets up the scene
         for i in 0...9{
             //let ButtonNode=Button(buttonNum:i)
             //MainNode.addChild(ButtonNode)
@@ -30,7 +30,7 @@ extension MenuScene{
         addChild(MainNode)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interactions
         let location=touches.first?.location(in: self)
         
         let nodes=nodes(at: location!)

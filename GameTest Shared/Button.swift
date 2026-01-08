@@ -49,7 +49,7 @@ extension Button{
         return buttonNum
     }
     
-    func setMainMenuButton(){
+    func setMainMenuButton(){   // sets up buttons in the main menu
         if(buttonNum==0){
             buttonNode=SKSpriteNode(imageNamed: "Continue_Game")
             buttonNode.name="ContinueGameButton"
@@ -123,7 +123,7 @@ extension Button{
         addChild(buttonNode)
     }
     
-    func setNewGameAButton(){
+    func setNewGameAButton(){   // sets up buttons in the new game scene
         if(buttonNum==10){
             buttonNode=SKSpriteNode(imageNamed: "Create")
             buttonNode.name="CreateButton"
@@ -155,7 +155,7 @@ extension Button{
         addChild(buttonNode)
     }
     
-    func setLoadGameBButton(){
+    func setLoadGameBButton(){   // sets up buttons in the load game scene
         if(buttonNum==14){
             buttonNode=SKSpriteNode(imageNamed: "Load")
             buttonNode.name="LoadButton"
@@ -173,7 +173,7 @@ extension Button{
         addChild(buttonNode)
     }
     
-    func setSettingsAButton(){
+    func setSettingsAButton(){   // sets up buttons in the settings scene
         if(buttonNum==16){
             buttonNode=SKSpriteNode(imageNamed: "Apply")
             buttonNode.name="ApplyButton"
@@ -191,7 +191,7 @@ extension Button{
         addChild(buttonNode)
     }
     
-    func setAchievementsAButton(){
+    func setAchievementsAButton(){   // sets up buttons in the achievements scene
         if(buttonNum==18){
             buttonNode=SKSpriteNode(imageNamed: "Back")
             buttonNode.name="BackButton"
@@ -202,7 +202,7 @@ extension Button{
         addChild(buttonNode)
     }
     
-    func setDailyChallengesButton(){
+    func setDailyChallengesButton(){   // sets up the buttons in the daily challenges scene
         if(buttonNum==19){
             buttonNode=SKSpriteNode(imageNamed: "Back")
             buttonNode.name="BackButton"

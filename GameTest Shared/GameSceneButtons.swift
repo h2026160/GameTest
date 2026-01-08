@@ -42,7 +42,7 @@ class GameSceneButtons: SKNode{
 }
 
 extension GameSceneButtons{
-    func setUpGameButtons(buttonIndex: Int){
+    func setUpGameButtons(buttonIndex: Int){   // sets up buttons in the game scene
         if(buttonIndex==1){
             gameSceneButtonNode=SKSpriteNode(imageNamed: "Schedule")
             gameSceneButtonNode.name="ScheduleButton"
@@ -403,7 +403,7 @@ extension GameSceneButtons{
         addChild(gameSceneButtonNode)
     }
     
-    func setUpMovableButtons(buttonIndex: Int,buttonRow: Int,buttonPage: Int){
+    func setUpMovableButtons(buttonIndex: Int,buttonRow: Int,buttonPage: Int){   // sets up buttons that are used in multiple rows in the game scene
         if(buttonIndex==1){
             gameSceneButtonNode=SKSpriteNode(imageNamed: "Add")
             gameSceneButtonNode.name="Add_Button-\(buttonPage)"

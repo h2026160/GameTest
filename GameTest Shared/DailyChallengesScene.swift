@@ -16,14 +16,14 @@ class DailyChallengesScene: SKScene{
 }
 
 extension DailyChallengesScene{
-    func setUpButton(){
+    func setUpButton(){   // sets up the scene
         MainNode.addChild(Map(mapNum: 101))
         MainNode.addChild(Button(buttonNum: 19))
         MainNode.addChild(Button(buttonNum: 20))
         addChild(MainNode)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interactions
         let location=touches.first?.location(in: self)
         
         let nodes=nodes(at: location!)

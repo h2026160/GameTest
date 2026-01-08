@@ -39,7 +39,7 @@ class Train: SKNode{
 
 extension Train{
     
-    func startMovementN(scheduleStopTimePage: Int){
+    func startMovementN(scheduleStopTimePage: Int){   // starts the northbound movement
         
         let updateLocation=SKAction.run { [weak self] in
             self?.locationIndex+=1
@@ -90,7 +90,7 @@ extension Train{
 //        }
     }
     
-    func startMovementS(scheduleStopTimePage: Int){
+    func startMovementS(scheduleStopTimePage: Int){   // starts the southbound movement
         
         let updateLocation=SKAction.run { [weak self] in
             self?.locationIndex-=1
@@ -121,7 +121,7 @@ extension Train{
         trainNode.run(loop)
     }
     
-    func setTrain(){
+    func setTrain(){   // sets up train into the scene
         trainNode=SKSpriteNode(imageNamed: "Train")
         trainNode.name="\(code)_Train"
         trainNode.position=CGPoint(x: 410, y: 27)
@@ -130,22 +130,22 @@ extension Train{
         addChild(trainNode)
     }
     
-    func changeStartStation(stationName: String){
+    func changeStartStation(stationName: String){   // changes the train's start station
         startStation=stationName
     }
     
-    func changeTerminusStation(stationName: String){
+    func changeTerminusStation(stationName: String){   // changes the train's end station
         endStation=stationName
     }
     
-    func changeDepartureTime(timePoint: Int){
+    func changeDepartureTime(timePoint: Int){   // changes the train's departure time
         departureTime=timePoint
     }
 //    func call(){
 //        print(self.endStation)
 //    }
     
-    func enterService(){
+    func enterService(){   // shows the train on the scene
         if(locationName=="Shougang_Park_Depot"){
             locationName="Shougang_Park"
             zPosition=8.0

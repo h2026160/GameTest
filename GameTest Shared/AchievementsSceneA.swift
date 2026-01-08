@@ -16,12 +16,12 @@ class AchievementsSceneA: SKScene{
 }
 
 extension AchievementsSceneA{
-    func setUpButton(){
+    func setUpButton(){   // sets up the scene
         MainNode.addChild(Button(buttonNum: 18))
         addChild(MainNode)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interactions
         let location=touches.first?.location(in: self)
         
         let nodes=nodes(at: location!)

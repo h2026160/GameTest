@@ -50,7 +50,7 @@ extension StartUpScene{
         //scene.addChild(MainNode)
     //}
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {   // button interaction
         for touch in touches {
             if touch==touches.first{
                 let newScene = SKScene(fileNamed: "MenuScene")
