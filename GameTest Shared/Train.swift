@@ -29,7 +29,12 @@ class Train: SKNode{
         
         self.zPosition = -3.0
         
-        setTrain()
+        if(code.prefix(2)=="11"){
+            setTrainM11()
+        }
+        if(code.prefix(1)=="6"){
+            setTrainM6()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +44,7 @@ class Train: SKNode{
 
 extension Train{
     
-    func startMovementN(scheduleStopTimePage: Int){   // starts the northbound movement
+    func startMovementN_M11(scheduleStopTimePage: Int){   // starts the northbound movement
         
         let updateLocation=SKAction.run { [weak self] in
             self?.locationIndex+=1
@@ -90,7 +95,7 @@ extension Train{
 //        }
     }
     
-    func startMovementS(scheduleStopTimePage: Int){   // starts the southbound movement
+    func startMovementS_M11(scheduleStopTimePage: Int){   // starts the southbound movement
         
         let updateLocation=SKAction.run { [weak self] in
             self?.locationIndex-=1
@@ -121,7 +126,71 @@ extension Train{
         trainNode.run(loop)
     }
     
-    func setTrain(){   // sets up train into the scene
+    func startMovementW_M6(scheduleStopTimePage: Int){
+        let ST=SKAction.wait(forDuration: 0.5)
+        let ML011=SKAction.moveBy(x: -38, y: 0, duration: 9*38/57.94)
+        let ML012=SKAction.moveBy(x: -7, y: 8, duration: 9*7/57.94)
+        let ML013=SKAction.moveBy(x: -12.94, y: 0, duration: 9*12.94/57.94)
+        let ML021=SKAction.moveBy(x: -12.94, y: 0, duration: 9*12.94/57.94)
+        let ML022=SKAction.moveBy(x: -7, y: -8, duration: 9*7/57.94)
+        let ML023=SKAction.moveBy(x: -38, y: 0, duration: 9*38/57.94)
+        let ML03=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML04=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML05=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML06=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML07=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML08=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML09=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML10=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML11=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML12=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML13=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML14=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML15=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML16=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML17=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML18=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML19=SKAction.moveBy(x: -57.94, y: 0, duration: 9)
+        let ML201=SKAction.moveBy(x: -38, y: 0, duration: 9*38/57.94)
+        let ML202=SKAction.moveBy(x: -7, y: -8, duration: 9*7/57.94)
+        let ML203=SKAction.moveBy(x: -12.94, y: 0, duration: 9*12.94/57.94)
+        
+        let loop=SKAction.sequence([ML011,ML012,ML013,ST,ML021,ML022,ML023,ST,ML03,ST,ML04,ST,ML05,ST,ML06,ST,ML07,ST,ML08,ST,ML09,ST,ML10,ST,ML11,ST,ML12,ST,ML13,ST,ML14,ST,ML15,ST,ML16,ST,ML17,ST,ML18,ST,ML19,ST,ML201,ML202,ML203,ST])
+        trainNode.run(loop)
+    }
+    
+    func startMovementE_M6(scheduleStopTimePage: Int){
+        let ST=SKAction.wait(forDuration: 0.5)
+        let MR01=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR02=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR03=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR04=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR05=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR06=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR07=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR08=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR09=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR10=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR11=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR12=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR13=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR14=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR15=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR16=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR17=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR18=SKAction.moveBy(x: 57.94, y: 0, duration: 9)
+        let MR191=SKAction.moveBy(x: 38, y: 0, duration: 9*38/57.94)
+        let MR192=SKAction.moveBy(x: 7, y: -8, duration: 9*7/57.94)
+        let MR193=SKAction.moveBy(x: 12.94, y: 0, duration: 9*12.94/57.94)
+        let MR201=SKAction.moveBy(x: 12.94, y: 0, duration: 9*12.94/57.94)
+        let MR202=SKAction.moveBy(x: 7, y: 8, duration: 9*7/57.94)
+        let MR203=SKAction.moveBy(x: 38, y: 0, duration: 9*38/57.94)
+        
+        let loop=SKAction.sequence([MR01,ST,MR02,ST,MR03,ST,MR04,ST,MR05,ST,MR06,ST,MR07,ST,MR08,ST,MR09,ST,MR10,ST,MR11,ST,MR12,ST,MR13,ST,MR14,ST,MR15,ST,MR16,ST,MR17,ST,MR18,ST,MR191,MR192,MR193,ST,MR201,MR202,MR203,ST])
+        trainNode.run(loop)
+    }
+    
+    func setTrainM11(){   // sets up train into the scene
         trainNode=SKSpriteNode(imageNamed: "Train")
         trainNode.name="\(code)_Train"
         trainNode.position=CGPoint(x: 410, y: 27)
@@ -129,6 +198,15 @@ extension Train{
         
         addChild(trainNode)
     }
+    
+    func setTrainM6(){   // sets up train into the scene
+        trainNode=SKSpriteNode(color: .brown, size: CGSize(width: 17, height: 1.7))
+        trainNode.name="\(code)_Train"
+        trainNode.position=CGPoint(x: 566, y: 1.1)
+        
+        addChild(trainNode)
+    }
+
     
     func changeStartStation(stationName: String){   // changes the train's start station
         startStation=stationName

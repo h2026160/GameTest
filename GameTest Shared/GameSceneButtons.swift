@@ -400,6 +400,76 @@ extension GameSceneButtons{
             gameSceneButtonNode.yScale=0.04
             gameSceneButtonNode.position=CGPoint(x: 400, y: -20)
         }
+        if(buttonIndex==52){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06001")
+            gameSceneButtonNode.name="M6_Train_1"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 180)
+        }
+        if(buttonIndex==53){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06002")
+            gameSceneButtonNode.name="M6_Train_2"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 130)
+        }
+        if(buttonIndex==54){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06003")
+            gameSceneButtonNode.name="M6_Train_3"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 80)
+        }
+        if(buttonIndex==55){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06004")
+            gameSceneButtonNode.name="M6_Train_4"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 30)
+        }
+        if(buttonIndex==56){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06005")
+            gameSceneButtonNode.name="M6_Train_5"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: -20)
+        }
+        if(buttonIndex==57){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06001(H)")
+            gameSceneButtonNode.name="M6_Train_1(H)"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 180)
+        }
+        if(buttonIndex==58){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06002(H)")
+            gameSceneButtonNode.name="M6_Train_2(H)"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 130)
+        }
+        if(buttonIndex==59){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06003(H)")
+            gameSceneButtonNode.name="M6_Train_3(H)"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 80)
+        }
+        if(buttonIndex==60){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06004(H)")
+            gameSceneButtonNode.name="M6_Train_4(H)"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: 30)
+        }
+        if(buttonIndex==61){
+            gameSceneButtonNode=SKSpriteNode(imageNamed: "06005(H)")
+            gameSceneButtonNode.name="M6_Train_5(H)"
+            gameSceneButtonNode.xScale=0.04
+            gameSceneButtonNode.yScale=0.04
+            gameSceneButtonNode.position=CGPoint(x: 400, y: -20)
+        }
         addChild(gameSceneButtonNode)
     }
     

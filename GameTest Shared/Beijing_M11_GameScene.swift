@@ -800,12 +800,12 @@ extension Beijing_M11_GameScene{
                         if(trains[i].locationName=="Shougang_Park"){
                             trains[i].startStation="Shougang_Park"
                             trains[i].endStation="Moshikou"
-                            trains[i].startMovementN(scheduleStopTimePage: scheduleStopTimePage)
+                            trains[i].startMovementN_M11(scheduleStopTimePage: scheduleStopTimePage)
                         }
                         else if(trains[i].locationName=="Moshikou"){
                             trains[i].startStation="Moshikou"
                             trains[i].endStation="Shougang_Park"
-                            trains[i].startMovementS(scheduleStopTimePage: scheduleStopTimePage)
+                            trains[i].startMovementS_M11(scheduleStopTimePage: scheduleStopTimePage)
                         }
                     }
                     else{
@@ -869,7 +869,7 @@ extension Beijing_M11_GameScene{
     
     func boardPassengers(train: Train, station: Station){   // move some passengers from the station array into the train array 
         var passengersBoarded=0
-        var emptySeats=train.capacity-train.passengersInTrain.count
+        let emptySeats=train.capacity-train.passengersInTrain.count
         if(emptySeats>0){
             if(train.endStation=="Moshikou"){
                 if(station.northBoundPassengers.count>0){
